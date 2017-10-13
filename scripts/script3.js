@@ -1,8 +1,14 @@
 $("#btnAceptar").onclick = function(){
-     apuestaMinima=$("#txtApuestaMinima");
-        if(apuestaMinima!==undefined&&apuestaMinima>=1){
+
+  apuestaMinima = $("#txtApuestaMinima").value;
+  if(apuestaMinima === "undefined" || apuestaMinima < 1 ){
+    $("#txtApuestaMinima").className = "bordeRojo";
+  }else{
+
   $("#divApuestaMinima").className = "oculto";
   $("#divIngresoDeDatos").className = "divIngresoDeDatos";
-  $("#spanApuestaMinima").innerHTML = apuestaMinima.value;
-        }
+  $("#spanApuestaMinima").innerHTML = apuestaMinima;
+  $("#lblJugadores").innerHTML = "JUGADORES:";
+}
+
 };
