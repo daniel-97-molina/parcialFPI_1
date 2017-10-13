@@ -24,6 +24,7 @@ body {
   display: none;
 }
 
+
 .main {
   background-image: url("../images/fondo-poker.png");
   width: 960px;
@@ -83,9 +84,14 @@ body {
   color: black;
   cursor: pointer;
 }
-.bordeRojo{
-  border: 1px solid red;
-}
 .bordeNormal{
   border: none;
 }
+.enabled{
+opacity: 1;    
+}
+.disabled{
+    
+    opacity: 0.2;    
+}
+
