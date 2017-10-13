@@ -86,17 +86,21 @@ function init() {
 }
 
 $("#btnAceptar").onclick = function(event) {
-
+    
   apuestaMinima = $("#txtApuestaMinima").value;
+  console.log("apuestaMinima: "+apuestaMinima)
   if (apuestaMinima === "undefined" || apuestaMinima < 1) {
     $("#txtApuestaMinima").className = "bordeRojo";
   } else {
     
+      
     $("#divApuestaMinima").className = "oculto";
     $("#divIngresoDeDatos").className = "divIngresoDeDatos";
     $("#spanApuestaMinima").innerHTML = apuestaMinima;
     $("#lblJugadores").innerHTML = "JUGADORES:";
 $("#txtNombre").focus();
+    $("#txtDinero").setAttribute("min",apuestaMinima.toString());
+    console.log("valor: "+$("#txtDinero").min);
   }
 
 };
@@ -114,6 +118,9 @@ $("#btnAgregarJugador").onclick = function(event) {
    
     error = true;
   }
+  if (iDinero === "" || iDinero === "undefined" || parseInt(iDinero)<apuestaMinima) {
+    error = true;
+  }
   
   if (!error) {
     var texto = document.createTextNode(sNombre + "-$" + iDinero);
@@ -124,9 +131,9 @@ $("#btnAgregarJugador").onclick = function(event) {
     $("#txtDinero").className = "bordeNormal";
     $("#txtDinero").className = "bordeNormal";
 
-
     event.preventDefault();
     $("#formIngresoDeDatos").reset();
+    
   }
   
   if(jugadores.length>=2){
