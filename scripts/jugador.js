@@ -23,12 +23,7 @@ function add(nombre, saldo) {
   jugadorAgregado.Carta1 = agregarCarta();
   jugadorAgregado.Carta2 = agregarCarta();
   jugadores.push(jugadorAgregado);
-  console.log(cartasAsignadas.length);
-  console.log(jugadorAgregado.Carta1);
-  console.log(jugadorAgregado.Carta2);
-
-
-}
+  }
 
 
 function agregarCarta() {
@@ -67,21 +62,16 @@ function $(query) {
 }
 
 /*-------------------------------------------------------------*/
-function reparticion() {
-  var carta1 = new Cartas();
-  var carta2 = new Cartas();
-
-
-}
 
 
 
-$("#btnComenzar").onclick = function() {
+$("#btnComenzar").onclick = function(event) {
+event.preventDefault();
+ 
 
-  if (jugadores.length > 1) {
-
-
-  }
+$("#divPantallaInicial").className="oculto";
+$("#main").className="main";
+  
 };
 
 
@@ -101,12 +91,12 @@ $("#btnAceptar").onclick = function(event) {
   if (apuestaMinima === "undefined" || apuestaMinima < 1) {
     $("#txtApuestaMinima").className = "bordeRojo";
   } else {
-
+    
     $("#divApuestaMinima").className = "oculto";
     $("#divIngresoDeDatos").className = "divIngresoDeDatos";
     $("#spanApuestaMinima").innerHTML = apuestaMinima;
     $("#lblJugadores").innerHTML = "JUGADORES:";
-
+$("#txtNombre").focus();
   }
 
 };
@@ -117,13 +107,14 @@ $("#btnAgregarJugador").onclick = function(event) {
   var iDinero = $("#txtDinero").value;
   var error = false;
   if (sNombre === "" || sNombre === "undefined") {
-    $("#txtNombre").className = "bordeRojo";
+    
     error = true;
   }
   if (iDinero === "") {
-    $("#txtDinero").className = "bordeRojo";
+   
     error = true;
   }
+  
   if (!error) {
     var texto = document.createTextNode(sNombre + "-$" + iDinero);
     var nodo = document.createElement("p");
@@ -137,5 +128,13 @@ $("#btnAgregarJugador").onclick = function(event) {
     event.preventDefault();
     $("#formIngresoDeDatos").reset();
   }
+  
+  if(jugadores.length>=2){
+      $("#btnComenzar").removeAttribute("disabled");
+      $("#btnComenzar").className="enabled";
+      
+    
+    
+    }
 
 };
