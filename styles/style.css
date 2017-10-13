@@ -20,7 +20,11 @@ body {
   font-family: sans-serif;
 }
 
-main {
+.oculto {
+  display: none;
+}
+
+.main {
   background-image: url("../images/fondo-poker.png");
   width: 960px;
   min-height: 600px;
