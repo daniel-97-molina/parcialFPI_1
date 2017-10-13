@@ -129,6 +129,7 @@ $("#btnAgregarJugador").onclick = function(event) {
 
     event.preventDefault();
     $("#formIngresoDeDatos").reset();
+    
   }
 
 };
