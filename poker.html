@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Poker</title>
   <meta charset="utf-8">
@@ -15,31 +16,35 @@
 
   <div id="divPantallaInicial">
     <div id="divApuestaMinima" class="divIngresoDeDatos">
-      <form>
-        <label for="txtApuestaMinima">Ingrese la apuesta mínima: $</label>
-        <input type="number" id="txtApuestaMinima" min="1" value="1" required>
-        <br>
-        <input type="button" value="Aceptar" id="btnAceptar">
-      </form>
-
+      <label for="txtApuestaMinima">Ingrese la apuesta mínima: $</label>
+      <input type="number" id="txtApuestaMinima" min="1" value="1" required>
+      <br>
+      <input type="button" value="Aceptar" id="btnAceptar">
     </div>
     <div id="divIngresoDeDatos" class="oculto">
       <h3>¡Bienvenido! La apuesta mínima es: $<span id="spanApuestaMinima"></span></h3>
       <div id="divAgregar">
+
         <label for="txtNombre">Nombre:</label>
-        <input type="text" id="txtNombre" required>
+        <input type="text" id="txtNombre" required title="Campo Obligatorio">
         <br>
         <label for="txtDinero">Dinero:</label>
-        <input type="text" id="txtDinero" required>
+        <input type="number" id="txtDinero" required title="CampoObligatorio" min="1">
         <br>
         <input type="button" value="Agregar jugador" id="btnAgregarJugador">
         <input type="button" value="Comenzar partida" id="btnComenzar">
+
+
       </div>
     </div>
 
+    <br>
+    <p id="lblJugadores"></p>
 
   </div>
-  <main class="oculto">
+
+
+  <main id="main" class="oculto">
 
   </main>
 
