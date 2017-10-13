@@ -1,5 +1,6 @@
-var players = [];
-var apuestaMinima;
+var jugadores = [];
+var apuestaMinima=0;
+
 function jugador(nombre,saldo){
 this.jugando = false;
 this.nombre=nombre;
@@ -13,7 +14,7 @@ jugador.prototype.apostar= function (monto){
 
 
 function add(nombre,saldo){
-    players.push(new jugador(nombre,saldo));
+     jugadores.push(new jugador(nombre,saldo));
     }
 
 
@@ -22,9 +23,7 @@ function $(query){
 }
 
 /*-------------------------------------------------------------*/
-window.onload = function () {
-    apuestaMinima=prompt("Bienvenido\n¿Que cantidad sera la apuesta minima?");
-};
+
 
 $("#btnAgregarJugador").onclick=function (){
     var sNombre=$("#txtNombre").value;
@@ -33,20 +32,26 @@ $("#btnAgregarJugador").onclick=function (){
     var nodo = document.createElement("p").appendChild(texto);
     
   add(sNombre,iDinero);
-    console.log(players[0].saldo);
+   
   $("#divPantallaInicial").appendChild(nodo);
 };
 
 
 $("#btnComenzar").onclick=function (){
+if(jugadores.length>1){
     
+ 
+    }
+};   
     
-};
+
 
 function init(){
     
     var iJ=Math.floor(Math.random()*5+1);
     $("#botonJ"+iJ).className="noseeee";
+    
+    
 }
 
 
