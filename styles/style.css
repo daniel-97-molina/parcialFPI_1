@@ -2,17 +2,20 @@ header {
   width: 100%;
   height: 60px;
   background-color: #23A870;
+  color: inherit;
   text-align: center;
 }
 header h1 {
   font-size: 36px;
   padding-top: 12px;
+  background-color: inherit;
   color: white;
   font-weight: bold;
 }
 
 body {
   background: #d1d1d1;
+  color: inherit;
   font-family: sans-serif;
 }
 
