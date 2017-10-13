@@ -18,7 +18,7 @@
     <div id="divApuestaMinima" class="divIngresoDeDatos">
       <form id="formApuestaMinima" onsubmit="return false">
         <label for="txtApuestaMinima">Ingrese la apuesta mínima: $</label>
-        <input type="number" id="txtApuestaMinima" min="1" value="1" required>
+        <input type="number" id="txtApuestaMinima" min="1" value="1" required autofocus>
         <br>
         <input type="submit"  value="Aceptar" id="btnAceptar">
       </form>
@@ -26,12 +26,12 @@
     <div id="divIngresoDeDatos" class="oculto">
       <h3>¡Bienvenido! La apuesta mínima es: $<span id="spanApuestaMinima"></span></h3>
       <div id="divAgregar">
-        <form id="formIngresoDeDatos">
+          <form id="formIngresoDeDatos">
           <label for="txtNombre">Nombre:</label>
           <input type="text" id="txtNombre" required title="Campo Obligatorio">
           <br>
           <label for="txtDinero">Dinero:</label>
-          <input type="number" id="txtDinero" required title="CampoObligatorio" min="1">
+          <input type="number" id="txtDinero" required title="Campo Obligatorio">
           <br>
           <input type="submit" value="Agregar jugador" id="btnAgregarJugador">
           <input type="button" value="Comenzar partida" id="btnComenzar">

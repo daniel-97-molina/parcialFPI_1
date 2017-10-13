@@ -67,12 +67,6 @@ function $(query) {
 }
 
 /*-------------------------------------------------------------*/
-function reparticion() {
-  var carta1 = new Cartas();
-  var carta2 = new Cartas();
-
-
-}
 
 
 
@@ -96,17 +90,19 @@ function init() {
 }
 
 $("#btnAceptar").onclick = function(event) {
-
+    
   apuestaMinima = $("#txtApuestaMinima").value;
+  console.log("apuestaMinima: "+apuestaMinima)
   if (apuestaMinima === "undefined" || apuestaMinima < 1) {
     $("#txtApuestaMinima").className = "bordeRojo";
   } else {
-
+      
     $("#divApuestaMinima").className = "oculto";
     $("#divIngresoDeDatos").className = "divIngresoDeDatos";
     $("#spanApuestaMinima").innerHTML = apuestaMinima;
     $("#lblJugadores").innerHTML = "JUGADORES:";
-
+    $("#txtDinero").setAttribute("min",apuestaMinima.toString());
+    console.log("valor: "+$("#txtDinero").min);
   }
 
 };
@@ -117,11 +113,9 @@ $("#btnAgregarJugador").onclick = function(event) {
   var iDinero = $("#txtDinero").value;
   var error = false;
   if (sNombre === "" || sNombre === "undefined") {
-    $("#txtNombre").className = "bordeRojo";
     error = true;
   }
-  if (iDinero === "") {
-    $("#txtDinero").className = "bordeRojo";
+  if (iDinero === "" || iDinero === "undefined" || parseInt(iDinero)<apuestaMinima) {
     error = true;
   }
   if (!error) {
@@ -132,7 +126,6 @@ $("#btnAgregarJugador").onclick = function(event) {
     $("#divPantallaInicial").appendChild(nodo);
     $("#txtDinero").className = "bordeNormal";
     $("#txtDinero").className = "bordeNormal";
-
 
     event.preventDefault();
     $("#formIngresoDeDatos").reset();
