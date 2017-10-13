@@ -32,6 +32,8 @@ body {
   background-repeat: no-repeat;
   margin: auto;
   background-size: contain;
+  position: relative;
+  top:70px;
 }
 
 #divPantallaInicial{
@@ -95,3 +97,10 @@ opacity: 1;
     opacity: 0.2;    
 }
 
+
+#divPantallaInicial > p{
+  text-align: center;
+  border-bottom: 1px solid darkgreen;
+  border-top: 1px solid darkgreen;
+  background-color: rgba( 128, 150, 138 ,0.5);
+}

@@ -1,6 +1,6 @@
 var jugadores = [];
 var apuestaMinima = 0;
-
+var turno;
 var cartasAsignadas = [];
 
 
@@ -78,9 +78,9 @@ $("#main").className="main";
 
 function init() {
 
-  var iJ = Math.floor(Math.random() * 5 + 1);
+  var iJ = Math.floor(Math.random() * jugadores.length + 1);
   $("#main").className = "main";
-  //    $("#nose").className="main";
+  
 
 
 }
@@ -88,7 +88,7 @@ function init() {
 $("#btnAceptar").onclick = function(event) {
     
   apuestaMinima = $("#txtApuestaMinima").value;
-  console.log("apuestaMinima: "+apuestaMinima)
+ 
   if (apuestaMinima === "undefined" || apuestaMinima < 1) {
     $("#txtApuestaMinima").className = "bordeRojo";
   } else {
