@@ -27,7 +27,9 @@ body {
 
 .main {
   background-image: url("../images/fondo-poker.png");
-  width: 960px;
+  position: relative;
+  top: 50px;
+  width: 800px;
   min-height: 600px;
   background-repeat: no-repeat;
   margin: auto;
@@ -94,4 +96,95 @@ opacity: 1;
     
     opacity: 0.2;    
 }
+
+/*DIVS JUGADORES*/
+
+.divJugador{
+    position: absolute;
+    background-color: rgba(109, 208, 111,0.9);
+    width: 230px;
+    height: 65px;
+    border: 2px solid rgba(109, 174, 136,0.7);
+    border-radius: 8px;
+    margin: 0;
+}
+.divImagenJugador{
+    border-radius: 50%; 
+    background-image: url("../images/icono-jugador.png");
+    background-size: contain;
+    height: 65px;
+    width: 65px;
+    display: inline-block;
+    margin-left: 10px;
+}
+.divInformacionJugador{
+    display: inline-block;
+    position: relative;
+    top: -18px;
+    left: 15px;
+    font-size: 16px;
+    
+}
+.divInformacionJugador h6{
+    padding-bottom: 6px;
+    margin-right: 50px;
+    
+}
+.divCarta1, .divCarta2{
+    height: 100px;
+    float: left;
+    width: 60px;
+    position: relative;
+    top: -7px;
+    background-image: url("../images/1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+/*POSICIONAMIENTO DE DIVS*/
+
+#div3, #div8{
+    left: 270px;
+}
+#div8{
+    top:370px;
+}#div3{
+    top:-30px;
+}
+#div2{
+    top:-30px;
+}
+#div4{
+    top:-30px;
+    left: 550px;
+}
+#div5{
+    top: 100px;
+    left: 700px;
+}
+#div6{
+    top: 250px;
+    left: 700px;
+}
+#div7{
+    top: 370px;
+    left: 550px;
+}
+#div9{
+    top: 370px;
+    
+}
+#div1{
+    top: 100px;
+    left: -150px;
+}
+#div10{
+    top: 250px;
+    left: -150px;
+}
+
+
+
+
 
