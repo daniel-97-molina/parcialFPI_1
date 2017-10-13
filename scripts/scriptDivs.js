@@ -1,77 +1,38 @@
 function posicionar(numJugadores) {
   switch (numJugadores) {
     case 2:
-      $("#div3").className = "divJugador";
-      $("#div8").className = "divJugador";
+      habilitarDivs(3, 8);
       break;
     case 3:
-      $("#div2").className = "divJugador";
-      $("#div4").className = "divJugador";
-      $("#div8").className = "divJugador";
+      habilitarDivs(2, 4, 8);
       break;
     case 4:
-      $("#div2").className = "divJugador";
-      $("#div4").className = "divJugador";
-      $("#div7").className = "divJugador";
-      $("#div9").className = "divJugador";
+      habilitarDivs(2, 4, 7, 8);
       break;
     case 5:
-      $("#div1").className = "divJugador";
-      $("#div3").className = "divJugador";
-      $("#div5").className = "divJugador";
-      $("#div7").className = "divJugador";
-      $("#div9").className = "divJugador";
+      habilitarDivs(1, 3, 5, 7, 9);
       break;
     case 6:
-      $("#div2").className = "divJugador";
-      $("#div4").className = "divJugador";
-      $("#div6").className = "divJugador";
-      $("#div7").className = "divJugador";
-      $("#div8").className = "divJugador";
-      $("#div10").className = "divJugador";
+      habilitarDivs(2, 4, 6, 7, 8, 10);
       break;
     case 7:
-      $("#div2").className = "divJugador";
-      $("#div3").className = "divJugador";
-      $("#div5").className = "divJugador";
-      $("#div6").className = "divJugador";
-      $("#div8").className = "divJugador";
-      $("#div9").className = "divJugador";
-      $("#div10").className = "divJugador";
+      habilitarDivs(2, 3, 5, 6, 8, 9, 10);
       break;
     case 8:
-      $("#div1").className = "divJugador";
-      $("#div2").className = "divJugador";
-      $("#div3").className = "divJugador";
-      $("#div4").className = "divJugador";
-      $("#div6").className = "divJugador";
-      $("#div7").className = "divJugador";
-      $("#div8").className = "divJugador";
-      $("#div9").className = "divJugador";
+      habilitarDivs(1, 2, 3, 4, 6, 7, 8, 9);
       break;
     case 9:
-      $("#div1").className = "divJugador";
-      $("#div2").className = "divJugador";
-      $("#div3").className = "divJugador";
-      $("#div4").className = "divJugador";
-      $("#div6").className = "divJugador";
-      $("#div7").className = "divJugador";
-      $("#div8").className = "divJugador";
-      $("#div9").className = "divJugador";
-      $("#div10").className = "divJugador";
+      habilitarDivs(1, 2, 3, 4, 6, 7, 8, 9, 10);
       break;
     case 10:
-      $("#div1").className = "divJugador";
-      $("#div2").className = "divJugador";
-      $("#div3").className = "divJugador";
-      $("#div4").className = "divJugador";
-      $("#div5").className = "divJugador";
-      $("#div6").className = "divJugador";
-      $("#div7").className = "divJugador";
-      $("#div8").className = "divJugador";
-      $("#div9").className = "divJugador";
-      $("#div10").className = "divJugador";
-
+      habilitarDivs(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
       break;
+  }
+}
+
+function habilitarDivs(divs) {
+  for (var i = 0; i < divs.length; i++) {
+    document.getElementById("\"" + "div" + divs[i] + "\"").className = "divJugador";
+    jugadores[i].div = "div" + divs[i];
   }
 }
