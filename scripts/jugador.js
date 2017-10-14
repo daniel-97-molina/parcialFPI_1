@@ -12,7 +12,7 @@ function jugador(nombre, saldo) {
   this.jugando = false;
   this.nombre = nombre;
   this.saldo = saldo;
-
+  this.div;
 }
 
 
@@ -23,7 +23,7 @@ function add(nombre, saldo) {
   jugadorAgregado.Carta1 = agregarCarta();
   jugadorAgregado.Carta2 = agregarCarta();
   jugadores.push(jugadorAgregado);
-  }
+}
 
 
 function agregarCarta() {
@@ -66,12 +66,12 @@ function $(query) {
 
 
 $("#btnComenzar").onclick = function(event) {
-event.preventDefault();
- 
+  event.preventDefault();
 
-$("#divPantallaInicial").className="oculto";
-$("#main").className="main";
-  
+
+  $("#divPantallaInicial").className = "oculto";
+  $("#main").className = "main";
+
 };
 
 
@@ -80,27 +80,27 @@ function init() {
 
   var iJ = Math.floor(Math.random() * jugadores.length + 1);
   $("#main").className = "main";
-  
+
 
 
 }
 
 $("#btnAceptar").onclick = function(event) {
-    
+
   apuestaMinima = $("#txtApuestaMinima").value;
- 
+
   if (apuestaMinima === "undefined" || apuestaMinima < 1) {
     $("#txtApuestaMinima").className = "bordeRojo";
   } else {
-    
-      
+
+
     $("#divApuestaMinima").className = "oculto";
     $("#divIngresoDeDatos").className = "divIngresoDeDatos";
     $("#spanApuestaMinima").innerHTML = apuestaMinima;
     $("#lblJugadores").innerHTML = "JUGADORES:";
-$("#txtNombre").focus();
-    $("#txtDinero").setAttribute("min",apuestaMinima.toString());
-    console.log("valor: "+$("#txtDinero").min);
+    $("#txtNombre").focus();
+    $("#txtDinero").setAttribute("min", apuestaMinima.toString());
+    console.log("valor: " + $("#txtDinero").min);
   }
 
 };
@@ -111,17 +111,17 @@ $("#btnAgregarJugador").onclick = function(event) {
   var iDinero = $("#txtDinero").value;
   var error = false;
   if (sNombre === "" || sNombre === "undefined") {
-    
+
     error = true;
   }
   if (iDinero === "") {
-   
+
     error = true;
   }
-  if (iDinero === "" || iDinero === "undefined" || parseInt(iDinero)<apuestaMinima) {
+  if (iDinero === "" || iDinero === "undefined" || parseInt(iDinero) < apuestaMinima) {
     error = true;
   }
-  
+
   if (!error) {
     var texto = document.createTextNode(sNombre + "-$" + iDinero);
     var nodo = document.createElement("p");
@@ -133,15 +133,15 @@ $("#btnAgregarJugador").onclick = function(event) {
 
     event.preventDefault();
     $("#formIngresoDeDatos").reset();
-    
+
   }
-  
-  if(jugadores.length>=2){
-      $("#btnComenzar").removeAttribute("disabled");
-      $("#btnComenzar").className="enabled";
-      
-    
-    
-    }
+
+  if (jugadores.length >= 2) {
+    $("#btnComenzar").removeAttribute("disabled");
+    $("#btnComenzar").className = "enabled";
+
+
+
+  }
 
 };
