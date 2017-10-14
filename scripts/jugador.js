@@ -27,7 +27,7 @@ function add(nombre, saldo) {
 
 
 function agregarCarta() {
-    var asignada = false;
+      var asignada = false;
     var contador = 0;
     var numCartas = cartasAsignadas.length;
     while (asignada === false) {
@@ -49,6 +49,7 @@ function agregarCarta() {
             }
         }
     }
+    console.log(cartaJugadorAgregado);
     return cartaJugadorAgregado;
 }
 
@@ -61,22 +62,16 @@ function $(query) {
 
 }
 
-/*-------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 
 
-<<<<<<< HEAD
-$("#btnComenzar").onclick = function(event) {
 
-event.preventDefault();
-$("#divBotonesHeader").style.display="inline-block"; 
-$("#div1 .divCarta1").style.backgroundImage="url('images/20.png')";
-=======
 $("#btnComenzar").onclick = function (event) {
     event.preventDefault();
->>>>>>> 659542711d792695c60e8b5665a974ab1a6519f1
-
+   
     posicionar(jugadores.length);
+     repartirCartasGenerales(3);
     $("#divPantallaInicial").className = "oculto";
     $("#main").className = "main";
     
@@ -91,6 +86,19 @@ function init() {
 
 
 
+}
+
+
+function repartirCartasGenerales(numCartas){//numCartas es para reutilizar el metodo cuando solo se tenga que asignar 1 sola carta en las rondas siguientes
+var numIteraciones=numCartas;
+    while(numCartas>0){
+        carta = agregarCarta();
+        numCartas--;
+}
+for(var i=numIteraciones;i>0;i--){//hize asi el bucle para que exactamente en el orden en que se hizo push se asigne la ruta: por ejemplo .carta1 con el primer elemento que se añadio, .carta2 con el segundo al que se le hizo push, etc.
+$(".carta"+i).style.backgroundImage="url("+cartasAsignadas[cartasAsignadas.length-i].generarRuta()+")";
+        }
+       
 }
 
 $("#btnAceptar").onclick = function (event) {

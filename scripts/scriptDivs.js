@@ -35,12 +35,16 @@ function habilitarDivs(divs) {
       var div=$("#div" + divs[i]);
     div.className = "divJugador";
     jugadores[i].div = div;
+        
    $("#div"+divs[i]+" h6").innerHTML=jugadores[i].nombre;
    $("#div"+divs[i]+" h5").innerHTML=jugadores[i].saldo;
-        console.log(jugadores[i].carta1.generarRuta());
-        var ruta = jugadores[i].carta1.generarRuta();
-  $("#div"+divs[i]+" .divCarta1").style.backgroundImage="url("+ruta+")";
-   $("#div"+divs[i]+" .divCarta1").style.display="inline-block";
+        
+        
+  $("#div"+divs[i]+" .divCarta1").style.backgroundImage="url("+jugadores[i].carta1.generarRuta()+")";
+ $("#div"+divs[i]+" .divCarta1").style.display="inline-block"; 
+        
+  $("#div"+divs[i]+" .divCarta2").style.backgroundImage="url("+jugadores[i].carta2.generarRuta()+")";
+ $("#div"+divs[i]+" .divCarta2").style.display="inline-block"; 
 
        
   }
