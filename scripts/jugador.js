@@ -4,52 +4,52 @@ var turno;
 var cartasAsignadas = [];
 
 
-jugador.prototype.apostar = function(monto) {
-  this.saldo -= monto;
+jugador.prototype.apostar = function (monto) {
+    this.saldo -= monto;
 };
 
 function jugador(nombre, saldo) {
-  this.jugando = false;
-  this.nombre = nombre;
-  this.saldo = saldo;
-
+    this.jugando = false;
+    this.nombre = nombre;
+    this.saldo = saldo;
+    this.div;
 }
 
 
 function add(nombre, saldo) {
 
-  var jugadorAgregado = new jugador(nombre, saldo);
+    var jugadorAgregado = new jugador(nombre, saldo);
 
-  jugadorAgregado.Carta1 = agregarCarta();
-  jugadorAgregado.Carta2 = agregarCarta();
-  jugadores.push(jugadorAgregado);
-  }
+    jugadorAgregado.carta1 = agregarCarta();
+    jugadorAgregado.carta2 = agregarCarta();
+    jugadores.push(jugadorAgregado);
+}
 
 
 function agregarCarta() {
-  var asignada = false;
-  var contador = 0;
-  var numCartas = cartasAsignadas.length;
-  while (asignada === false) {
-    contador = 0;
-    numCartas = cartasAsignadas.length;
-    var cartaJugadorAgregado = new Cartas();
-    if (numCartas === 0) {
-      cartasAsignadas.push(cartaJugadorAgregado);
-      asignada = true;
-    } else {
-      for (var i = 0; i < numCartas; i++) {
-        if (cartasAsignadas[i].carta !== cartaJugadorAgregado.carta) {
-          contador = contador + 1;
+    var asignada = false;
+    var contador = 0;
+    var numCartas = cartasAsignadas.length;
+    while (asignada === false) {
+        contador = 0;
+        numCartas = cartasAsignadas.length;
+        var cartaJugadorAgregado = new Cartas();
+        if (numCartas === 0) {
+            cartasAsignadas.push(cartaJugadorAgregado);
+            asignada = true;
+        } else {
+            for (var i = 0; i < numCartas; i++) {
+                if (cartasAsignadas[i].carta !== cartaJugadorAgregado.carta) {
+                    contador = contador + 1;
+                }
+            }
+            if (contador === numCartas) {
+                cartasAsignadas.push(cartaJugadorAgregado);
+                asignada = true;
+            }
         }
-      }
-      if (contador === numCartas) {
-        cartasAsignadas.push(cartaJugadorAgregado);
-        asignada = true;
-      }
     }
-  }
-  return cartaJugadorAgregado;
+    return cartaJugadorAgregado;
 }
 
 
@@ -57,7 +57,7 @@ function agregarCarta() {
 
 function $(query) {
 
-  return document.querySelector(query);
+    return document.querySelector(query);
 
 }
 
@@ -65,85 +65,91 @@ function $(query) {
 
 
 
+<<<<<<< HEAD
 $("#btnComenzar").onclick = function(event) {
 
 event.preventDefault();
 $("#divBotonesHeader").style.display="inline-block"; 
 $("#div1 .divCarta1").style.backgroundImage="url('images/20.png')";
+=======
+$("#btnComenzar").onclick = function (event) {
+    event.preventDefault();
+>>>>>>> 659542711d792695c60e8b5665a974ab1a6519f1
 
-$("#divPantallaInicial").className="oculto";
-$("#main").className="main";
-  
+    posicionar(jugadores.length);
+    $("#divPantallaInicial").className = "oculto";
+    $("#main").className = "main";
+    
 };
 
 
 
 function init() {
 
-  var iJ = Math.floor(Math.random() * jugadores.length + 1);
-  $("#main").className = "main";
-  
+    var iJ = Math.floor(Math.random() * jugadores.length + 1);
+    $("#main").className = "main";
+
 
 
 }
 
-$("#btnAceptar").onclick = function(event) {
-    
-  apuestaMinima = $("#txtApuestaMinima").value;
- 
-  if (apuestaMinima === "undefined" || apuestaMinima < 1) {
-    $("#txtApuestaMinima").className = "bordeRojo";
-  } else {
-    
-      
-    $("#divApuestaMinima").className = "oculto";
-    $("#divIngresoDeDatos").className = "divIngresoDeDatos";
-    $("#spanApuestaMinima").innerHTML = apuestaMinima;
-    $("#lblJugadores").innerHTML = "JUGADORES:";
-$("#txtNombre").focus();
-    $("#txtDinero").setAttribute("min",apuestaMinima.toString());
-    console.log("valor: "+$("#txtDinero").min);
-  }
+$("#btnAceptar").onclick = function (event) {
+
+    apuestaMinima = $("#txtApuestaMinima").value;
+
+    if (apuestaMinima === "undefined" || apuestaMinima < 1) {
+        $("#txtApuestaMinima").className = "bordeRojo";
+    } else {
+
+
+        $("#divApuestaMinima").className = "oculto";
+        $("#divIngresoDeDatos").className = "divIngresoDeDatos";
+        $("#spanApuestaMinima").innerHTML = apuestaMinima;
+        $("#lblJugadores").innerHTML = "JUGADORES:";
+        $("#txtNombre").focus();
+        $("#txtDinero").setAttribute("min", apuestaMinima.toString());
+        console.log("valor: " + $("#txtDinero").min);
+    }
 
 };
 
-$("#btnAgregarJugador").onclick = function(event) {
+$("#btnAgregarJugador").onclick = function (event) {
 
-  var sNombre = $("#txtNombre").value;
-  var iDinero = $("#txtDinero").value;
-  var error = false;
-  if (sNombre === "" || sNombre === "undefined") {
-    
-    error = true;
-  }
-  if (iDinero === "") {
-   
-    error = true;
-  }
-  if (iDinero === "" || iDinero === "undefined" || parseInt(iDinero)<apuestaMinima) {
-    error = true;
-  }
-  
-  if (!error) {
-    var texto = document.createTextNode(sNombre + "-$" + iDinero);
-    var nodo = document.createElement("p");
-    nodo.appendChild(texto);
-    add(sNombre, iDinero);
-    $("#divPantallaInicial").appendChild(nodo);
-    $("#txtDinero").className = "bordeNormal";
-    $("#txtDinero").className = "bordeNormal";
+    var sNombre = $("#txtNombre").value;
+    var iDinero = $("#txtDinero").value;
+    var error = false;
+    if (sNombre === "" || sNombre === "undefined") {
 
-    event.preventDefault();
-    $("#formIngresoDeDatos").reset();
-    
-  }
-  
-  if(jugadores.length>=2){
-      $("#btnComenzar").removeAttribute("disabled");
-      $("#btnComenzar").className="enabled";
-      
-    
-    
+        error = true;
+    }
+    if (iDinero === "") {
+
+        error = true;
+    }
+    if (iDinero === "" || iDinero === "undefined" || parseInt(iDinero) < apuestaMinima) {
+        error = true;
+    }
+
+    if (!error) {
+        var texto = document.createTextNode(sNombre + "-$" + iDinero);
+        var nodo = document.createElement("p");
+        nodo.appendChild(texto);
+        add(sNombre, iDinero);
+        $("#divPantallaInicial").appendChild(nodo);
+        $("#txtDinero").className = "bordeNormal";
+        $("#txtDinero").className = "bordeNormal";
+
+        event.preventDefault();
+        $("#formIngresoDeDatos").reset();
+
+    }
+
+    if (jugadores.length >= 2) {
+        $("#btnComenzar").removeAttribute("disabled");
+        $("#btnComenzar").className = "enabled";
+
+
+
     }
 
 };
