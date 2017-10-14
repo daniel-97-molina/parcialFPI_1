@@ -31,9 +31,21 @@ function posicionar(numJugadores) {
 }
 
 function habilitarDivs(divs) {
-  console.log(divs);
   for (var i = 0; i < divs.length; i++) {
-    document.getElementById("div" + divs[i]).className = "divJugador";
-    jugadores[i].div = "div" + divs[i];
+      var div=$("#div" + divs[i]);
+    div.className = "divJugador";
+    jugadores[i].div = div;
+
+   $("#div"+divs[i]+" h6").innerHTML=jugadores[i].nombre;
+   $("#div"+divs[i]+" h5").innerHTML=jugadores[i].saldo;
+
+
+  $("#div"+divs[i]+" .divCarta1").style.backgroundImage="url("+jugadores[i].carta1.generarRuta()+")";
+ $("#div"+divs[i]+" .divCarta1").style.display="inline-block";
+
+  $("#div"+divs[i]+" .divCarta2").style.backgroundImage="url("+jugadores[i].carta2.generarRuta()+")";
+ $("#div"+divs[i]+" .divCarta2").style.display="inline-block";
+
+
   }
 }

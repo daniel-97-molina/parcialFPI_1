@@ -11,9 +11,18 @@
     </head>
 
     <body>
+
         <header>
-            <h1>Texas Hold'em</h1>
+            <!--<h1>Texas Hold'em</h1>-->
+            <img src="images/logo.png" alt="Texas Hold'em">
+            <div id="divBotonesHeader">
+                <input type="button" value="Apostar">
+                <input type="button" value="Pasar">
+                <input type="button" value="Retirarme">    
+            </div>
+
         </header>
+
 
         <div id="divPantallaInicial" class="divPantallaInicial">
             <div id="divApuestaMinima" class="divIngresoDeDatos">
@@ -49,23 +58,18 @@
         </div>
 
 
-        <main id="main" class="oculto">
-
-            <div id="div1" class="divJugador">
-                <div class="divCarta1">
-                </div>
-                <div class="divCarta2">
-                </div>
-                <div class="divImagenJugador">
-
-                </div>
-                <div class="divInformacionJugador">
-                    <h6>Nombre</h6>
-                    <h5>Saldo:</h5>
-                </div>
+        <main id="main" class="oculto" >
+            <div class="cartasJuego">
+                <div class="carta1"></div>
+                <div class="carta2"></div>
+                <div class="carta3"></div>
+                <div class="carta4"></div>
+                <div class="carta5"></div>
+                
                 
             </div>
-            <div id="div2" class="divJugador">
+
+            <div id="div1" class="oculto" >
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -77,9 +81,9 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
             </div>
-            <div id="div3" class="divJugador">
+            <div id="div2" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -88,12 +92,12 @@
 
                 </div>
                 <div class="divInformacionJugador">
-                    <h6>Nombre</h6>
-                    <h5>Saldo:</h5>
+                    <h6></h6>
+                    <h5></h5>
                 </div>
-                
+
             </div>
-            <div id="div4" class="divJugador">
+            <div id="div3" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -105,9 +109,9 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
             </div>
-            <div id="div5" class="divJugador">
+            <div id="div4" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -119,9 +123,9 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
             </div>
-            <div id="div6" class="divJugador">
+            <div id="div5" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -133,9 +137,9 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
             </div>
-            <div id="div7" class="divJugador">
+            <div id="div6" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -147,9 +151,9 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
             </div>
-            <div id="div8" class="divJugador">
+            <div id="div7" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -161,9 +165,9 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
             </div>
-            <div id="div9" class="divJugador">
+            <div id="div8" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -175,9 +179,9 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
             </div>
-            <div id="div10" class="divJugador">
+            <div id="div9" class="oculto">
                 <div class="divCarta1">
                 </div>
                 <div class="divCarta2">
@@ -189,7 +193,21 @@
                     <h6>Nombre</h6>
                     <h5>Saldo:</h5>
                 </div>
-                
+
+            </div>
+            <div id="div10" class="oculto">
+                <div class="divCarta1">
+                </div>
+                <div class="divCarta2">
+                </div>
+                <div class="divImagenJugador">
+
+                </div>
+                <div class="divInformacionJugador">
+                    <h6>Nombre</h6>
+                    <h5>Saldo:</h5>
+                </div>
+
             </div>
         </main>
 
@@ -198,6 +216,7 @@
         <script src="scripts/jugador.js"></script>
         <script src="scripts/script3.js"></script>
         <script src="scripts/claseCarta.js"></script>
+        <script src="scripts/scriptDivs.js"></script>
     </body>
 
 
