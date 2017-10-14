@@ -1,6 +1,6 @@
 function Cartas() {
 
-  this.familia = Math.floor(Math.random() * 3 + 0);
+  this.familia = Math.floor(Math.random() * 3);
   this.numero = Math.floor(Math.random() * 13 + 1);
   this.carta = this.numero + (13 * this.familia);
 
