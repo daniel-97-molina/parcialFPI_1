@@ -1,17 +1,34 @@
 header {
   width: 100%;
-  height: 60px;
+  height: 90px;
   background-color: #23A870;
   color: inherit;
   text-align: center;
 }
 
-header h1 {
-  font-size: 36px;
-  padding-top: 12px;
-  background-color: inherit;
-  color: white;
-  font-weight: bold;
+header #divBotonesHeader{
+    display: none;
+}
+
+header input{
+    position: relative;
+    top: -33px;
+    display: inline-block;
+    height: 70px;
+    width: 130px;
+    border-radius: 10px;
+    background-color: #569750;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header img {
+    display: inline-block;
+  height: 80px;
+  width: auto;
+  padding-top: 5px;
+  padding-right: 60px;
 }
 
 body {
@@ -30,7 +47,7 @@ body {
   position: relative;
   top: 50px;
   width: 800px;
-  min-height: 600px;
+  min-height: 400px;
   background-repeat: no-repeat;
   margin: auto;
   background-size: contain;
@@ -150,7 +167,7 @@ opacity: 1;
     background-image: url("../images/1.png");
     background-size: contain;
     background-repeat: no-repeat;
-    display: none;
+    display: inline-block;
 }
 
 /*POSICIONAMIENTO DE DIVS*/
@@ -184,7 +201,6 @@ opacity: 1;
 }
 #div9{
     top: 370px;
-    
 }
 #div1{
     top: 100px;

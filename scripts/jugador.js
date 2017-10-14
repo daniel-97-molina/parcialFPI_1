@@ -66,8 +66,10 @@ function $(query) {
 
 
 $("#btnComenzar").onclick = function(event) {
+
 event.preventDefault();
- 
+$("#divBotonesHeader").style.display="inline-block"; 
+$("#div1 .divCarta1").style.backgroundImage="url('images/20.png')";
 
 $("#divPantallaInicial").className="oculto";
 $("#main").className="main";
