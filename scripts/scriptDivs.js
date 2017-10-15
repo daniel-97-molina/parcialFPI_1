@@ -31,13 +31,14 @@ function posicionar(numJugadores) {
 }
 
 function habilitarDivs(divs) {
+    var posicion = Math.floor(Math.random() * (divs.length-1));
   for (var i = 0; i < divs.length; i++) {
       var div=$("#div" + divs[i]);
     div.className = "divJugador";
     jugadores[i].div = div;
 
    $("#div"+divs[i]+" h6").innerHTML=jugadores[i].nombre;
-   $("#div"+divs[i]+" h5").innerHTML=jugadores[i].saldo;
+   $("#div"+divs[i]+" h5").innerHTML="$"+jugadores[i].saldo;
 
 
   $("#div"+divs[i]+" .divCarta1").style.backgroundImage="url("+jugadores[i].carta1.generarRuta()+")";
@@ -48,4 +49,6 @@ function habilitarDivs(divs) {
 
 
   }
-}
+  $("#"+jugadores[posicion].div.id+" span").className="boton";
+  
+  }

@@ -4,7 +4,7 @@ var turno; //variable no usada
 var cartasAsignadas = [];
 
 var vectorCartasGenerales = []; //Irvin
-var contadorCartaGeneral=1; //Irvin
+var contadorCartaGeneral = 1; //Irvin
 
 
 jugador.prototype.apostar = function (monto) {
@@ -30,7 +30,7 @@ function add(nombre, saldo) {
 
 
 function agregarCarta() {
-      var asignada = false;
+    var asignada = false;
     var contador = 0;
     var numCartas = cartasAsignadas.length;
     while (asignada === false) {
@@ -63,8 +63,12 @@ function $(query) {
     return document.querySelector(query);
 
 }
-
+$(".range").onchange=function(){
+$("#lblRangeValue").innerHTML ="$"+$(".range").value;
+};
 /*--------------------------------------------------------------------------------------------------------------------------*/
+
+
 
 
 
@@ -73,15 +77,13 @@ $("#btnComenzar").onclick = function (event) {
     event.preventDefault();
 
     posicionar(jugadores.length);
-     //repartirCartasGenerales(3); //Irvin
-     for (var m = 0; m < 3; m++) {//Irvin
-     agregarCartaGeneral();//Irvin
-   }//Irvin
+
+    agregarCartaGeneral(3);//zaldivar
+
     $("#divPantallaInicial").className = "oculto";
+    $("header div").id="divBotonesHeader";
     $("#main").className = "main";
 
-    //Irvin
-    //combinacionCartasGenerales();
 
 };
 
@@ -96,32 +98,19 @@ function init() {
 
 }
 
-/*
-function repartirCartasGenerales(numCartas){//numCartas es para reutilizar el metodo cuando solo se tenga que asignar 1 sola carta en las rondas siguientes
-var numIteraciones=numCartas;
-    while(numCartas>0){
-        carta = agregarCarta();
-        numCartas--;
-}
-for(var i=numIteraciones;i>0;i--){//hize asi el bucle para que exactamente en el orden en que se hizo push se asigne la ruta: por ejemplo .carta1 con el primer elemento que se añadio, .carta2 con el segundo al que se le hizo push, etc.
-$(".carta"+i).style.backgroundImage="url("+cartasAsignadas[cartasAsignadas.length-i].generarRuta()+")";
-        }
-
-}
-*/
 
 
 //Irvin
-function agregarCartaGeneral(){
-
-  agregarCartaGeneral.cartaGnl = agregarCarta();
-  vectorCartasGenerales.push(agregarCartaGeneral.cartaGnl);
-  $(".carta"+contadorCartaGeneral).style.backgroundImage="url("+agregarCartaGeneral.cartaGnl.generarRuta()+")";
-  contadorCartaGeneral = contadorCartaGeneral+1;
-
-  ////posiblesCombinaciones(numIteraciones);  //Irvin
-  //return vectorCartasGenerales; //Irvin
-  //combinacionCartasGenerales(vectorCartasGenerales); //Irvin
+function agregarCartaGeneral(iteraciones) {
+    for (var i = 0; i < iteraciones; i++) {//zaldivar
+        var cartaGeneralAgregada = agregarCarta();
+        vectorCartasGenerales.push(cartaGeneralAgregada);
+        $(".carta" + contadorCartaGeneral).style.backgroundImage = "url(" + cartaGeneralAgregada.generarRuta() + ")";
+        contadorCartaGeneral = contadorCartaGeneral + 1;
+    }
+    ////posiblesCombinaciones(numIteraciones);  //Irvin
+    //return vectorCartasGenerales; //Irvin
+    //combinacionCartasGenerales(vectorCartasGenerales); //Irvin
 }
 
 
@@ -142,7 +131,7 @@ $("#btnAceptar").onclick = function (event) {
         $("#lblJugadores").innerHTML = "JUGADORES:";
         $("#txtNombre").focus();
         $("#txtDinero").setAttribute("min", apuestaMinima.toString());
-        console.log("valor: " + $("#txtDinero").min);
+
     }
 
 };
