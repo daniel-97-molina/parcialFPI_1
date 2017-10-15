@@ -35,7 +35,7 @@ function posiblesCombinaciones(vectorCombinaciones) {
 
   }
   cadenaFamilias = familiasCartasGenerales[0] + "" + familiasCartasGenerales[1] + "" + familiasCartasGenerales[2] + "" + familiaCarta1Jugador + "" + familiaCarta2Jugador;
-  cadenaNumeros = numerosCartasGenerales[0] + numerosCartasGenerales[1] + numerosCartasGenerales[2] + numeroCarta1Jugador + numeroCarta2Jugador;
+  cadenaNumeros = numerosCartasGenerales[0] +""+ numerosCartasGenerales[1] +""+ numerosCartasGenerales[2] +""+ numeroCarta1Jugador +""+ numeroCarta2Jugador;
 
 
 
