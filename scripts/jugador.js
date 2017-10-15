@@ -4,7 +4,7 @@ var turno; //variable no usada
 var cartasAsignadas = [];
 
 var vectorCartasGenerales = []; //Irvin
-var contadorCartaGeneral=0; //Irvin
+var contadorCartaGeneral=1; //Irvin
 
 
 jugador.prototype.apostar = function (monto) {
@@ -38,7 +38,7 @@ function agregarCarta() {
         numCartas = cartasAsignadas.length;
         var cartaAgregada = new Cartas();
         if (numCartas === 0) {
-            cartasAsignadas.push();
+            cartasAsignadas.push(cartaAgregada);
             asignada = true;
         } else {
             for (var i = 0; i < numCartas; i++) {
@@ -73,12 +73,15 @@ $("#btnComenzar").onclick = function (event) {
     event.preventDefault();
 
     posicionar(jugadores.length);
-     //repartirCartasGenerales(3); Irvin
-     for (var i = 0; i < 3; i++) {//Irvin
+     //repartirCartasGenerales(3); //Irvin
+     for (var m = 0; m < 3; m++) {//Irvin
      agregarCartaGeneral();//Irvin
    }//Irvin
     $("#divPantallaInicial").className = "oculto";
     $("#main").className = "main";
+
+    //Irvin
+    //combinacionCartasGenerales();
 
 };
 
@@ -108,20 +111,19 @@ $(".carta"+i).style.backgroundImage="url("+cartasAsignadas[cartasAsignadas.lengt
 */
 
 
-////////////////////////////Irvin
+//Irvin
 function agregarCartaGeneral(){
-  var cartaGeneralAgregada= new Object();
 
-  cartaGeneralAgregada.cartaGeneral = agregarCarta();
-  vectorCartasGenerales.push(cartaGeneralAgregada);
-  $(".carta"+(contadorCartaGeneral+1)).style.backgroundImage="url("+cartaGeneralAgregada.cartaGeneral.generarRuta()+")";
+  agregarCartaGeneral.cartaGnl = agregarCarta();
+  vectorCartasGenerales.push(agregarCartaGeneral.cartaGnl);
+  $(".carta"+contadorCartaGeneral).style.backgroundImage="url("+agregarCartaGeneral.cartaGnl.generarRuta()+")";
   contadorCartaGeneral = contadorCartaGeneral+1;
 
   ////posiblesCombinaciones(numIteraciones);  //Irvin
   //return vectorCartasGenerales; //Irvin
   //combinacionCartasGenerales(vectorCartasGenerales); //Irvin
 }
-//////////////////////////////////////////////////////
+
 
 
 
