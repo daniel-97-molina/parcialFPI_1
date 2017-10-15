@@ -74,15 +74,18 @@ $("#btnComenzar").onclick = function (event) {
 
     posicionar(jugadores.length);
      //repartirCartasGenerales(3); //Irvin
-     for (var m = 0; m < 3; m++) {//Irvin
+     for (var m = 0; m < 5; m++) {//Irvin
      agregarCartaGeneral();//Irvin
    }//Irvin
     $("#divPantallaInicial").className = "oculto";
     $("#main").className = "main";
 
     //Irvin
-    //combinacionCartasGenerales();
-
+    combinacionCartasGenerales(0);
+    //for (var i = 0; i < vectorCartasGenerales.length; i++) {
+      //console.log(vectorCartasGenerales[i].familia);
+      //console.log(vectorCartasGenerales[i].numero);
+    //}
 };
 
 
@@ -113,10 +116,9 @@ $(".carta"+i).style.backgroundImage="url("+cartasAsignadas[cartasAsignadas.lengt
 
 //Irvin
 function agregarCartaGeneral(){
-
-  agregarCartaGeneral.cartaGnl = agregarCarta();
-  vectorCartasGenerales.push(agregarCartaGeneral.cartaGnl);
-  $(".carta"+contadorCartaGeneral).style.backgroundImage="url("+agregarCartaGeneral.cartaGnl.generarRuta()+")";
+var cartaGeneralAgregada = agregarCarta();
+  vectorCartasGenerales.push(cartaGeneralAgregada);
+  $(".carta"+contadorCartaGeneral).style.backgroundImage="url("+cartaGeneralAgregada.generarRuta()+")";
   contadorCartaGeneral = contadorCartaGeneral+1;
 
   ////posiblesCombinaciones(numIteraciones);  //Irvin
