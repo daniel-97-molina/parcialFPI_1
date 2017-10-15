@@ -1,6 +1,6 @@
 var jugadores = [];
 var apuestaMinima = 0;
-var turno; //variable no usada
+var turno=0; //variable no usada
 var cartasAsignadas = [];
 
 var vectorCartasGenerales = []; //Irvin
@@ -80,25 +80,77 @@ $("#btnComenzar").onclick = function (event) {
 
     agregarCartaGeneral(3);//zaldivar
 
+   
+     
+  
     $("#divPantallaInicial").className = "oculto";
     $("header div").id="divBotonesHeader";
     $("#main").className = "main";
+    turnoiInicial();
 
 
+    //Irvin
+    //combinacionCartasGenerales(0);
+    //for (var i = 0; i < vectorCartasGenerales.length; i++) {
+      //console.log(vectorCartasGenerales[i].familia);
+      //console.log(vectorCartasGenerales[i].numero);
+    //}
+    
 };
 
 
 
-function init() {
+function turnoiInicial() {
+    
 
-    var iJ = Math.floor(Math.random() * jugadores.length + 1);
-    $("#main").className = "main";
+if(posicion===(jugadores.length-1)){
+   
+    turno=2;                                
+                                    
+    }
+   else if(posicion===(jugadores.length-2)){//es decir si la posicion es 3 y hay 5 jugadores(ultima posicion : 4)
 
-
+        turno=1;                  
+                                    
+    }
+    else if(posicion===(jugadores.length-3)){//es decir si la posicion es 2 y hay 5 jugadores(ultima posicion : 4)
+        turno=0;
+                                  
+   }else{
+    turno=posicion+3;
+   }
+   var div_JugadorenJuego = jugadores[turno].div;
+div_JugadorenJuego.className+=" turno";
+    mostrarCartas(div_JugadorenJuego.id);
 
 }
+function mostrarCartas(id_divJugador){
+    var idDivAnterior;
+    if(turno===0){idDivAnterior=jugadores[jugadores.length-1].div.id;}
+    else{idDivAnterior=jugadores[turno-1].div.id;}
+$("#"+idDivAnterior+" .divCarta1").style.backgroundImage="url(cartaVolteada.jpg)";
+ 
+$("#"+idDivAnterior+" .divCarta2").style.backgroundImage="url(cartaVolteada.jpg)";
+   
+$("#"+id_divJugador+" .divCarta1").style.backgroundImage="url("+jugadores[turno].carta1.generarRuta()+")";
+$("#"+id_divJugador+" .divCarta2").style.backgroundImage="url("+jugadores[turno].carta2.generarRuta()+")";
+}
+
+$("#igualar").onclick=function (){
+    controladorTurno();
+    };
 
 
+function controladorTurno(){
+    if(jugadores.length!==0){
+    jugadores[turno].div.className="divJugador";
+    if(turno===jugadores.length-1){turno=0;}
+    else{turno++;}
+    var div_JugadorenJuego = jugadores[turno].div;
+    div_JugadorenJuego.className+=" turno";
+    mostrarCartas(div_JugadorenJuego.id);
+    }
+}
 
 //Irvin
 function agregarCartaGeneral(iteraciones) {
@@ -108,10 +160,14 @@ function agregarCartaGeneral(iteraciones) {
         $(".carta" + contadorCartaGeneral).style.backgroundImage = "url(" + cartaGeneralAgregada.generarRuta() + ")";
         contadorCartaGeneral = contadorCartaGeneral + 1;
     }
-    ////posiblesCombinaciones(numIteraciones);  //Irvin
-    //return vectorCartasGenerales; //Irvin
-    //combinacionCartasGenerales(vectorCartasGenerales); //Irvin
+
+  ////posiblesCombinaciones(numIteraciones);  //Irvin
+  //return vectorCartasGenerales; //Irvin
+  //combinacionCartasGenerales(vectorCartasGenerales); //Irvin
 }
+
+
+
 
 
 
