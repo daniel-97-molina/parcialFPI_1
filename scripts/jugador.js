@@ -1,7 +1,10 @@
 var jugadores = [];
 var apuestaMinima = 0;
-var turno;
+var turno; //variable no usada
 var cartasAsignadas = [];
+
+var vectorCartasGenerales = []; //Irvin
+var contadorCartaGeneral=0; //Irvin
 
 
 jugador.prototype.apostar = function (monto) {
@@ -33,26 +36,25 @@ function agregarCarta() {
     while (asignada === false) {
         contador = 0;
         numCartas = cartasAsignadas.length;
-        var cartaJugadorAgregado = new Cartas();
+        var cartaAgregada = new Cartas();
         if (numCartas === 0) {
-            cartasAsignadas.push(cartaJugadorAgregado);
+            cartasAsignadas.push();
             asignada = true;
         } else {
             for (var i = 0; i < numCartas; i++) {
-                if (cartasAsignadas[i].carta !== cartaJugadorAgregado.carta) {
+                if (cartasAsignadas[i].carta !== cartaAgregada.carta) {
                     contador = contador + 1;
                 }
             }
             if (contador === numCartas) {
-                cartasAsignadas.push(cartaJugadorAgregado);
+                cartasAsignadas.push(cartaAgregada);
                 asignada = true;
             }
         }
     }
-    console.log(cartaJugadorAgregado);
-    return cartaJugadorAgregado;
+    console.log(cartaAgregada);
+    return cartaAgregada;
 }
-
 
 
 
@@ -71,7 +73,10 @@ $("#btnComenzar").onclick = function (event) {
     event.preventDefault();
 
     posicionar(jugadores.length);
-     repartirCartasGenerales(3);
+     //repartirCartasGenerales(3); Irvin
+     for (var i = 0; i < 3; i++) {//Irvin
+     agregarCartaGeneral();//Irvin
+   }//Irvin
     $("#divPantallaInicial").className = "oculto";
     $("#main").className = "main";
 
@@ -88,7 +93,7 @@ function init() {
 
 }
 
-
+/*
 function repartirCartasGenerales(numCartas){//numCartas es para reutilizar el metodo cuando solo se tenga que asignar 1 sola carta en las rondas siguientes
 var numIteraciones=numCartas;
     while(numCartas>0){
@@ -100,6 +105,25 @@ $(".carta"+i).style.backgroundImage="url("+cartasAsignadas[cartasAsignadas.lengt
         }
 
 }
+*/
+
+
+////////////////////////////Irvin
+function agregarCartaGeneral(){
+  var cartaGeneralAgregada= new Object();
+
+  cartaGeneralAgregada.cartaGeneral = agregarCarta();
+  vectorCartasGenerales.push(cartaGeneralAgregada);
+  $(".carta"+(contadorCartaGeneral+1)).style.backgroundImage="url("+cartaGeneralAgregada.cartaGeneral.generarRuta()+")";
+  contadorCartaGeneral = contadorCartaGeneral+1;
+
+  ////posiblesCombinaciones(numIteraciones);  //Irvin
+  //return vectorCartasGenerales; //Irvin
+  //combinacionCartasGenerales(vectorCartasGenerales); //Irvin
+}
+//////////////////////////////////////////////////////
+
+
 
 $("#btnAceptar").onclick = function (event) {
 
