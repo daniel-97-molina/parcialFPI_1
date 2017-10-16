@@ -3,7 +3,7 @@
 function combinacionCartasGenerales(posicionJugador) {
   var mejorCombinacion = 0;
   var resultadoCombinaciones = [];
-
+  
   resultadoCombinaciones[0] = posiblesCombinaciones([0, 1, 2, posicionJugador]); //4
   resultadoCombinaciones[1] = posiblesCombinaciones([1, 2, 3, posicionJugador]); //6
   resultadoCombinaciones[2] = posiblesCombinaciones([2, 3, 4, posicionJugador]); //7
@@ -37,15 +37,17 @@ function posiblesCombinaciones(vectorCombinaciones) {
 
   for (var t = 0; t < 3; t++) {
     arrayFamiliasCartas[t] = vectorCartasGenerales[(vectorCombinaciones[t])].familia;
-    arrayNumerosCartas[t] = vectorCartasGenerales[(vectorCombinaciones[t])].numero;
+   // arrayNumerosCartas[t] = vectorCartasGenerales[(vectorCombinaciones[t])].numero;
   }
 
   arrayFamiliasCartas[3] = jugadores[(vectorCombinaciones[3])].carta1.familia;
   arrayFamiliasCartas[4] = jugadores[(vectorCombinaciones[3])].carta2.familia;
 
-  arrayNumerosCartas[3] = jugadores[(vectorCombinaciones[3])].carta1.numero;
-  arrayNumerosCartas[4] = jugadores[(vectorCombinaciones[3])].carta2.numero;
+  //arrayNumerosCartas[3] = jugadores[(vectorCombinaciones[3])].carta1.numero;
+  //arrayNumerosCartas[4] = jugadores[(vectorCombinaciones[3])].carta2.numero;
 
+    arrayNumerosCartas = [3,3,2,3,3];
+    
   //Para ordenar los arrays de menor a mayor
   arrayFamiliasCartas.sort(function(a, b) {
     return a - b;
@@ -75,7 +77,44 @@ function posiblesCombinaciones(vectorCombinaciones) {
 
   //COMBINACION 2: Pareja
   //Una pareja de cartas iguales
-
+  
+    
+    
+    var contador = 0;
+    var cuantasParejas = 0;
+    var cuantosTrios = 0;
+    for(var n = 0 ;n<arrayNumerosCartas.length;n++){
+      var valorActual = arrayNumerosCartas[n];  
+      for(m = 0; m<arrayNumerosCartas.length; m++){
+          if(valorActual === arrayNumerosCartas[m]){
+              contador++;
+          }
+      }
+      if(contador===2){
+          combinacionGanadora = 2;
+          if(cuantasParejas===2){
+              combinacionGanadora = 3;
+              break;
+          }
+          if(cuantosTrios===3){
+              combinacionGanadora = 7;
+              break;
+          }
+          cuantasParejas ++;
+      }else if(contador===3){
+          combinacionGanadora = 4;
+          if(cuantasParejas === 2){
+              combinacionGanadora = 7;
+              break;
+          }
+          cuantosTrios ++;
+          
+      }else if(contador ===4){
+          combinacionGanadora = 8;
+          break;
+      }
+      contador=0;
+    }
 
   //COMBINACION 3: Doble pareja
   //Dos parejas de cartas iguales

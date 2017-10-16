@@ -82,7 +82,7 @@ $("#btnComenzar").onclick = function(event) {
 
   posicionar(jugadores.length);
 
-  agregarCartaGeneral(3); //zaldivar
+  agregarCartaGeneral(5); //zaldivar
 
   $("#divPantallaInicial").className = "oculto";
   $("header div").id = "divBotonesHeader";
@@ -90,8 +90,7 @@ $("#btnComenzar").onclick = function(event) {
   turnoiInicial();
 
   //Irvin
-  console.log("Esta 1 es la mejor combinacion :" + combinacionCartasGenerales(0));
-  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(1));
+  console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
 };
 
 
