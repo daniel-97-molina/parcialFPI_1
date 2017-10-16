@@ -9,7 +9,7 @@ var apuestaAnterior = 0;
 var subidaActual=0;
 
 jugador.prototype.apostar = function (monto) {
-    this.saldo = monto - this.apuesta;
+    this.saldo -= (monto - this.apuesta);
     this.apuesta = monto;
     $("#" + this.div.id + " label").innerHTML = "$" + this.apuesta;
     $("#" + this.div.id + " h5").innerHTML = "$" + this.saldo;
@@ -23,6 +23,10 @@ function jugador(nombre, saldo) {
     this.saldo = saldo;
     this.div;
     this.apuesta = 0;
+  
+
+  
+  //this.div;  //Irvin
 }
 
 
@@ -58,12 +62,12 @@ function agregarCarta() {
                 asignada = true;
             }
         }
-    }
+
     console.log(cartaAgregada);
     return cartaAgregada;
 }
 
-
+}
 
 function $(query) {
 
@@ -89,15 +93,18 @@ $("#btnComenzar").onclick = function (event) {
 
     posicionar(jugadores.length);
 
-    agregarCartaGeneral(3); //zaldivar
 
     $("#divPantallaInicial").className = "oculto";
     $("header div").id = "divBotonesHeader";
     $("#main").className = "main";
     turnoInicial();
 
+  agregarCartaGeneral(5); //zaldivar
 
 
+  //Irvin
+  console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
+  console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
 };
 
 
