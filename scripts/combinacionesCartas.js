@@ -37,16 +37,15 @@ function posiblesCombinaciones(vectorCombinaciones) {
 
   for (var t = 0; t < 3; t++) {
     arrayFamiliasCartas[t] = vectorCartasGenerales[(vectorCombinaciones[t])].familia;
-   // arrayNumerosCartas[t] = vectorCartasGenerales[(vectorCombinaciones[t])].numero;
+    arrayNumerosCartas[t] = vectorCartasGenerales[(vectorCombinaciones[t])].numero;
   }
 
   arrayFamiliasCartas[3] = jugadores[(vectorCombinaciones[3])].carta1.familia;
   arrayFamiliasCartas[4] = jugadores[(vectorCombinaciones[3])].carta2.familia;
 
-  //arrayNumerosCartas[3] = jugadores[(vectorCombinaciones[3])].carta1.numero;
-  //arrayNumerosCartas[4] = jugadores[(vectorCombinaciones[3])].carta2.numero;
+  arrayNumerosCartas[3] = jugadores[(vectorCombinaciones[3])].carta1.numero;
+  arrayNumerosCartas[4] = jugadores[(vectorCombinaciones[3])].carta2.numero;
 
-    arrayNumerosCartas = [3,3,2,3,3];
     
   //Para ordenar los arrays de menor a mayor
   arrayFamiliasCartas.sort(function(a, b) {
@@ -60,11 +59,6 @@ function posiblesCombinaciones(vectorCombinaciones) {
     cadenaFamilias = cadenaFamilias + "" + arrayFamiliasCartas[i];
     cadenaNumeros = cadenaNumeros + "" + arrayNumerosCartas[i];
   }
-  //console.log(arrayFamiliasCartas);
-  //console.log(cadenaFamilias);
-  //console.log(arrayNumerosCartas);
-  //console.log(cadenaNumeros);
-
 
 
 
@@ -74,17 +68,31 @@ function posiblesCombinaciones(vectorCombinaciones) {
   el ganador de la partida será el que tenga la carta más fuerte, siendo el As la mejor en estos casos.
   Es también la carta más fuerte la que desempata dos combinaciones idénticas.*/
 
+    //SI NO SE CUMPLEN LAS OTRAS, ES "CARTA MÁS ALTA"
+    combinacionGanadora = 1;
+
 
   //COMBINACION 2: Pareja
   //Una pareja de cartas iguales
   
-    
+  //COMBINACION 3: Doble pareja
+  //Dos parejas de cartas iguales
+
+  //COMBINACION 4: Trío
+  //3 cartas iguales
+
+  //COMBINACION 7: Full
+  /*3 cartas iguales más otras 2 iguales. Es decir, un trio y una pareja.
+  En caso de empate, gana el que tiene el trio más alto*/
+
+  //COMBINACION 8: Poker
+  //4 cartas con el mismo numero y una diferente
     
     var contador = 0;
     var cuantasParejas = 0;
     var cuantosTrios = 0;
     for(var n = 0 ;n<arrayNumerosCartas.length;n++){
-      var valorActual = arrayNumerosCartas[n];  
+      var valorActual = arrayNumerosCartas[n];
       for(m = 0; m<arrayNumerosCartas.length; m++){
           if(valorActual === arrayNumerosCartas[m]){
               contador++;
@@ -116,14 +124,6 @@ function posiblesCombinaciones(vectorCombinaciones) {
       contador=0;
     }
 
-  //COMBINACION 3: Doble pareja
-  //Dos parejas de cartas iguales
-
-
-  //COMBINACION 4: Trío
-  //3 cartas iguales
-
-
   //COMBINACION 5: Escalera
   //5 cartas sucesivas que no son del mismo color
   if (/(12345){5}$/.test(cadenaNumeros) || /(23456){5}$/.test(cadenaNumeros) || /(34567){5}$/.test(cadenaNumeros) || /(45678){5}$/.test(cadenaNumeros) || /(56789){5}$/.test(cadenaNumeros) || /(678910){6}$/.test(cadenaNumeros)) {
@@ -142,21 +142,6 @@ function posiblesCombinaciones(vectorCombinaciones) {
     console.log("5 cartas del mismo color (2)");
     combinacionGanadora = 6;
   }
-
-
-  //COMBINACION 7: Full
-  /*3 cartas iguales más otras 2 iguales. Es decir, un trio y una pareja.
-  En caso de empate, gana el que tiene el trio más alto*/
-
-
-  //COMBINACION 8: Poker
-  //4 cartas con el mismo numero y una diferente
-  ////////////////////////////////////////////////////////////////// ARREGLAR ESTO
-  /*if (/(0){4}$/.test(cadenaNumeros)) {
-    console.log("4 cartas con el mismo numero y una diferente (2)");
-    combinacionGanadora = 8;
-  }*/
-  ////////////////////////////////////////////////////////////////////// ARREGLAR ESTO
 
 
 
@@ -182,53 +167,6 @@ function posiblesCombinaciones(vectorCombinaciones) {
       combinacionGanadora = 10;
     }
   }
-
-
-
-
-
-  //Expresion regular para digitos 5 consecutivos
-  /*if (/^\d{5}$/.test(12345)) {
-    console.log("que interante esto");
-  }
-  if (/^\d{5}$/.test(35801)) {
-    console.log("que interante esto2");
-  }
-  if (/^\d{5}$/.test(13579)) {
-    console.log("que interante esto3");
-  }
-  if (/^\d{5}$/.test(94827)) {
-    console.log("que interante esto4");
-  }*/
-
-
-  //console.log("que interante esto2");
-  //expresion regualr para un valor repetido n veces
-  //if (/(4){5}$/.test(44454)) {
-  //console.log("vamos a terminar el proyecto");
-  //}
-
-
-
-  //COMBINACION 8: Poker
-  //4 cartas con el mismo numero y una diferente
-  if ((arrayNumerosCartas[0] === arrayNumerosCartas[1]) && (arrayNumerosCartas[0] === arrayNumerosCartas[2]) && (arrayNumerosCartas[0] === arrayNumerosCartas[3])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  } else if ((arrayNumerosCartas[0] === arrayNumerosCartas[1]) && (arrayNumerosCartas[0] === arrayNumerosCartas[2]) && (arrayNumerosCartas[0] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  } else if ((arrayNumerosCartas[1] === arrayNumerosCartas[2]) && (arrayNumerosCartas[1] === arrayNumerosCartas[3]) && (arrayNumerosCartas[1] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-  } else if ((arrayNumerosCartas[0] === arrayNumerosCartas[1]) && (arrayNumerosCartas[0] === arrayNumerosCartas[3]) && (arrayNumerosCartas[0] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  } else if ((arrayNumerosCartas[0] === arrayNumerosCartas[2]) && (arrayNumerosCartas[0] === arrayNumerosCartas[3]) && (arrayNumerosCartas[0] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  }
-
-
 
 
   return combinacionGanadora;
