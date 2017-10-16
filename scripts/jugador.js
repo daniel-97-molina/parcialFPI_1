@@ -82,7 +82,7 @@ $("#btnComenzar").onclick = function(event) {
 
   posicionar(jugadores.length);
 
-  agregarCartaGeneral(3); //zaldivar
+  agregarCartaGeneral(5); //zaldivar
 
   $("#divPantallaInicial").className = "oculto";
   $("header div").id = "divBotonesHeader";
@@ -92,6 +92,10 @@ $("#btnComenzar").onclick = function(event) {
   //Irvin
   console.log("Esta 1 es la mejor combinacion :" + combinacionCartasGenerales(0));
   console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(1));
+  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(2));
+  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(3));
+  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(4));
+  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(5));
 };
 
 

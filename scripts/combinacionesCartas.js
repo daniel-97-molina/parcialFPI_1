@@ -29,6 +29,7 @@ function combinacionCartasGenerales(posicionJugador) {
 //Metodo para establecer las 10 combinaciones posibles para ganar
 //Devuelve en orden ascendente la combinacion de cartas que se pudo formar
 function posiblesCombinaciones(vectorCombinaciones) {
+
   var combinacionGanadora = 0;
   var arrayFamiliasCartas = [];
   var arrayNumerosCartas = [];
@@ -58,12 +59,6 @@ function posiblesCombinaciones(vectorCombinaciones) {
     cadenaFamilias = cadenaFamilias + "" + arrayFamiliasCartas[i];
     cadenaNumeros = cadenaNumeros + "" + arrayNumerosCartas[i];
   }
-  //console.log(arrayFamiliasCartas);
-  //console.log(cadenaFamilias);
-  //console.log(arrayNumerosCartas);
-  //console.log(cadenaNumeros);
-
-
 
 
 
@@ -86,21 +81,20 @@ function posiblesCombinaciones(vectorCombinaciones) {
 
 
   //COMBINACION 5: Escalera
-  //5 cartas sucesivas que no son del mismo color
-  if (/(12345){5}$/.test(cadenaNumeros) || /(23456){5}$/.test(cadenaNumeros) || /(34567){5}$/.test(cadenaNumeros) || /(45678){5}$/.test(cadenaNumeros) || /(56789){5}$/.test(cadenaNumeros) || /(678910){6}$/.test(cadenaNumeros)) {
-    console.log("5 cartas sucesivas que no son del mismo color) (2)");
+  //5 cartas sucesivas que no son del misma familia
+  if (/(12345)$/.test(cadenaNumeros) || /(23456)$/.test(cadenaNumeros) || /(34567)$/.test(cadenaNumeros) || /(45678)$/.test(cadenaNumeros) || /(56789)$/.test(cadenaNumeros) || /(678910)$/.test(cadenaNumeros)) {
+    console.log("5 cartas sucesivas que no son del misma familia) (2)");
     combinacionGanadora = 5;
-  } else if (/(7891011){7}$/.test(cadenaNumeros) || /(89101112){8}$/.test(cadenaNumeros) || /(910111213){9}$/.test(cadenaNumeros) || /(110111213){9}$/.test(cadenaNumeros)) {
-    console.log("5 cartas sucesivas que no son del mismo color (3)");
+  } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros) || /(110111213)$/.test(cadenaNumeros)) {
+    console.log("5 cartas sucesivas que no son del misma familia (3)");
     combinacionGanadora = 5;
   }
-  //revisar bien como funciona el else if
 
 
-  //COMBINACION 6: Color
-  // 5 cartas del mismo color
+  //COMBINACION 6: familia
+  // 5 cartas del misma familia
   if (/(0){5}$/.test(cadenaFamilias) || /(1){5}$/.test(cadenaFamilias) || /(2){5}$/.test(cadenaFamilias) || /(3){5}$/.test(cadenaFamilias)) {
-    console.log("5 cartas del mismo color (2)");
+    console.log("5 cartas del misma familia (2)");
     combinacionGanadora = 6;
   }
 
@@ -112,23 +106,18 @@ function posiblesCombinaciones(vectorCombinaciones) {
 
   //COMBINACION 8: Poker
   //4 cartas con el mismo numero y una diferente
-  ////////////////////////////////////////////////////////////////// ARREGLAR ESTO
-  /*if (/(0){4}$/.test(cadenaNumeros)) {
-    console.log("4 cartas con el mismo numero y una diferente (2)");
-    combinacionGanadora = 8;
-  }*/
-  ////////////////////////////////////////////////////////////////////// ARREGLAR ESTO
 
 
 
-  //COMBINACION 9:Escalera color
-  //5 cartas consecutivas del mismo color
+
+  //COMBINACION 9:Escalera familia
+  //5 cartas consecutivas del misma familia
   if (/(0){5}$/.test(cadenaFamilias) || /(1){5}$/.test(cadenaFamilias) || /(2){5}$/.test(cadenaFamilias) || /(3){5}$/.test(cadenaFamilias)) {
-    if (/(12345){5}$/.test(cadenaNumeros) || /(23456){5}$/.test(cadenaNumeros) || /(34567){5}$/.test(cadenaNumeros) || /(45678){5}$/.test(cadenaNumeros) || /(56789){5}$/.test(cadenaNumeros) || /(678910){6}$/.test(cadenaNumeros)) {
-      console.log("5 cartas consecutivas del mismo color (2)");
+    if (/(12345)$/.test(cadenaNumeros) || /(23456)$/.test(cadenaNumeros) || /(34567)$/.test(cadenaNumeros) || /(45678)$/.test(cadenaNumeros) || /(56789)$/.test(cadenaNumeros) || /(678910)$/.test(cadenaNumeros)) {
+      console.log("5 cartas consecutivas del misma familia (2)");
       combinacionGanadora = 9;
-    } else if (/(7891011){7}$/.test(cadenaNumeros) || /(89101112){8}$/.test(cadenaNumeros) || /(910111213){9}$/.test(cadenaNumeros)) {
-      console.log("5 cartas consecutivas del mismo color (3)");
+    } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros)) {
+      console.log("5 cartas consecutivas del misma familia (3)");
       combinacionGanadora = 9;
     }
   }
@@ -136,59 +125,13 @@ function posiblesCombinaciones(vectorCombinaciones) {
 
 
   //COMBINACION 10:Escalera Real
-  //5 cartas seguidas del mismo color desde el 10 al As
+  //5 cartas seguidas del misma familia desde el 10 al As
   if (/(0){5}$/.test(cadenaFamilias) || /(1){5}$/.test(cadenaFamilias) || /(2){5}$/.test(cadenaFamilias) || /(3){5}$/.test(cadenaFamilias)) {
-    if (/(110111213){9}$/.test(cadenaNumeros)) {
-      console.log("5 cartas seguidas del mismo color desde el 10 al As (2)");
+    if (/(110111213)$/.test(cadenaNumeros)) {
+      console.log("5 cartas seguidas del misma familia desde el 10 al As (2)");
       combinacionGanadora = 10;
     }
   }
-
-
-
-
-
-  //Expresion regular para digitos 5 consecutivos
-  /*if (/^\d{5}$/.test(12345)) {
-    console.log("que interante esto");
-  }
-  if (/^\d{5}$/.test(35801)) {
-    console.log("que interante esto2");
-  }
-  if (/^\d{5}$/.test(13579)) {
-    console.log("que interante esto3");
-  }
-  if (/^\d{5}$/.test(94827)) {
-    console.log("que interante esto4");
-  }*/
-
-
-  //console.log("que interante esto2");
-  //expresion regualr para un valor repetido n veces
-  //if (/(4){5}$/.test(44454)) {
-  //console.log("vamos a terminar el proyecto");
-  //}
-
-
-
-  //COMBINACION 8: Poker
-  //4 cartas con el mismo numero y una diferente
-  if ((arrayNumerosCartas[0] === arrayNumerosCartas[1]) && (arrayNumerosCartas[0] === arrayNumerosCartas[2]) && (arrayNumerosCartas[0] === arrayNumerosCartas[3])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  } else if ((arrayNumerosCartas[0] === arrayNumerosCartas[1]) && (arrayNumerosCartas[0] === arrayNumerosCartas[2]) && (arrayNumerosCartas[0] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  } else if ((arrayNumerosCartas[1] === arrayNumerosCartas[2]) && (arrayNumerosCartas[1] === arrayNumerosCartas[3]) && (arrayNumerosCartas[1] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-  } else if ((arrayNumerosCartas[0] === arrayNumerosCartas[1]) && (arrayNumerosCartas[0] === arrayNumerosCartas[3]) && (arrayNumerosCartas[0] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  } else if ((arrayNumerosCartas[0] === arrayNumerosCartas[2]) && (arrayNumerosCartas[0] === arrayNumerosCartas[3]) && (arrayNumerosCartas[0] === arrayNumerosCartas[4])) {
-    console.log("4 cartas con el mismo numero y una diferente");
-    combinacionGanadora = 8;
-  }
-
 
 
 
