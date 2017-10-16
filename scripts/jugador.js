@@ -16,7 +16,7 @@ function jugador(nombre, saldo) {
   this.jugando = false;
   this.nombre = nombre;
   this.saldo = saldo;
-  this.div;
+  //this.div;  //Irvin
 }
 
 
@@ -34,10 +34,11 @@ function agregarCarta() {
   var asignada = false;
   var contador = 0;
   var numCartas = cartasAsignadas.length;
+  var cartaAgregada;
   while (asignada === false) {
     contador = 0;
     numCartas = cartasAsignadas.length;
-    var cartaAgregada = new Cartas();
+    cartaAgregada = new Cartas();
     if (numCartas === 0) {
       cartasAsignadas.push(cartaAgregada);
       asignada = true;
@@ -90,12 +91,8 @@ $("#btnComenzar").onclick = function(event) {
   turnoiInicial();
 
   //Irvin
-  console.log("Esta 1 es la mejor combinacion :" + combinacionCartasGenerales(0));
-  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(1));
-  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(2));
-  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(3));
-  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(4));
-  console.log("Esta 2 es la mejor combinacion :" + combinacionCartasGenerales(5));
+  console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
+  console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
 };
 
 
