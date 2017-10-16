@@ -91,6 +91,10 @@ $("#btnComenzar").onclick = function(event) {
 
   //Irvin
   console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
+  console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
+  console.log("Jugador 2 mejor combinación: " + combinacionCartasGenerales(2));
+  console.log("Jugador 3 mejor combinación: " + combinacionCartasGenerales(3));
+  console.log("Jugador 4 mejor combinación: " + combinacionCartasGenerales(4));
 };
 
 
