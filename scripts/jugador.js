@@ -81,7 +81,8 @@ $("#btnComenzar").onclick = function (event) {
     $("#main").className = "main";
 
     //Irvin
-    combinacionCartasGenerales(0);
+    console.log("Esta 1 es la mejor combinacion :"+combinacionCartasGenerales(0));
+    console.log("Esta 2 es la mejor combinacion :"+combinacionCartasGenerales(1));
     //for (var i = 0; i < vectorCartasGenerales.length; i++) {
       //console.log(vectorCartasGenerales[i].familia);
       //console.log(vectorCartasGenerales[i].numero);
