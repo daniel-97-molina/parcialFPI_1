@@ -127,7 +127,7 @@ function posiblesCombinaciones(vectorCombinaciones) {
     if (/(12345){5}$/.test(cadenaNumeros) || /(23456){5}$/.test(cadenaNumeros) || /(34567){5}$/.test(cadenaNumeros) || /(45678){5}$/.test(cadenaNumeros) || /(56789){5}$/.test(cadenaNumeros) || /(678910){6}$/.test(cadenaNumeros)) {
       console.log("5 cartas consecutivas del mismo color (2)");
       combinacionGanadora = 9;
-    } else if (/(7891011){7}$/.test(cadenaNumeros) || /(89101112){8}$/.test(cadenaNumeros) || /(910111213){9}$/.test(cadenaNumeros) || /(110111213){9}$/.test(cadenaNumeros)) {
+    } else if (/(7891011){7}$/.test(cadenaNumeros) || /(89101112){8}$/.test(cadenaNumeros) || /(910111213){9}$/.test(cadenaNumeros)) {
       console.log("5 cartas consecutivas del mismo color (3)");
       combinacionGanadora = 9;
     }
