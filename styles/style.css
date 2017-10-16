@@ -5,24 +5,49 @@ header {
   color: inherit;
   text-align: center;
   position: relative;
-  z-index: -2;
+ 
 }
-
-header #divBotonesHeader{
-    display: none;
+.turno{
+    box-shadow: 5px 5px 15px 10px #1c52d7;
 }
+#divBotonesHeader{
+position: absolute;
 
-header input{
-    position: relative;
-    top: -33px;
+width: 26%;
+height:100%;
+right: 0;
+top:0;
+background-color: rgba(0,0,0,0.6);
+
+}
+#divBotonesHeader div{
+    
+}
+#divBotonesHeader p{
+    
+    color:#fff;
+}
+ label{
+        color: #fff;
+        }
+.range{
+    margin: 2% 0;
+    height: 10px;
+    width: 200px;
+    border-radius: 5px;
+     
+}
+header input[type="button"]{
+    
+    
     display: inline-block;
-    height: 70px;
-    width: 130px;
-    border-radius: 10px;
+    height: 30px;
+    width: 80px;
+    border-radius: 40px;
     background-color: #569750;
     color: white;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 12px;
+    
 }
 
 header img {
@@ -39,8 +64,11 @@ body {
   font-family: sans-serif;
 }
 
-.oculto {
+.oculto , #oculto{
   display: none;
+}
+.ocultoInput{
+    visibility: hidden;
 }
 
 
@@ -56,6 +84,7 @@ body {
   position: relative;
   top:70px;
   z-index: -2;
+
 }
 
 #divPantallaInicial{
@@ -103,7 +132,10 @@ body {
   margin-top: 5px;
   padding: 6px;
 }
-.divIngresoDeDatos input[type="button"]:hover,input[type="submit"]:hover{
+.range:hover{
+    cursor: pointer;
+}
+input[type="button"]:hover,input[type="submit"]:hover{
   background-color: rgba(255, 255, 255, 0.8);
   color: black;
   cursor: pointer;
@@ -139,6 +171,7 @@ opacity: 1;
     border-radius: 8px;
     margin: 0;
      border: 1px solid #000;
+     
 }
 .divImagenJugador{
     height: 70px;
@@ -159,8 +192,8 @@ opacity: 1;
     width: 70%;
     text-align: center;
     right: 5%;
-    bottom: 20%;
-    font-size: 16px;
+    bottom: 25%;
+    font-size: 14px;
     color: #fff;
     
 }
@@ -175,11 +208,23 @@ opacity: 1;
     width: 60px;
     position: relative;
     bottom: 90%;
-    background-image: url(../images/1.png);
+    background-image: url(../cartaVolteada.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     display: inline-block;
     z-index: -1;
+}
+.boton{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 50%;
+    background-size: cover;
+    background-image: url("../botonTurno.jpg");
+    bottom: 70%;
+    left: 80%;
+    border: 1px solid #000;
+    
 }
 
 /*POSICIONAMIENTO DE DIVS*/
@@ -190,21 +235,21 @@ opacity: 1;
 #div8{
     top:370px;
 }#div3{
-    top:-30px;
+    top:-15px;
 }
 #div2{
-    top:-30px;
+    top:-15px;
 }
 #div4{
-    top:-30px;
+    top:-15px;
     left: 550px;
 }
 #div5{
-    top: 100px;
+    top: 110px;
     left: 700px;
 }
 #div6{
-    top: 250px;
+    top: 260px;
     left: 700px;
 }
 #div7{
