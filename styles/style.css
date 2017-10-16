@@ -23,6 +23,55 @@ background-color: rgba(0,0,0,0.6);
 #divBotonesHeader div{
     
 }
+.divJugador > label, .pot{
+    position: absolute;
+    width: auto;
+    
+    padding-top: 2px;
+    height: 15px;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    font-size: 12px;
+    
+}
+.apuesta_jugador1{
+    top:60%;
+    right: -40%;
+}
+.apuesta_jugador2{
+    right: 0;
+}
+.apuesta_jugador3{
+  left: 50%;
+}
+.apuesta_jugador4{
+    left: 0;
+}
+.apuesta_jugador5{
+    left: -40%;
+    top:60%;
+}
+.apuesta_jugador6{
+    left: -40%;
+    top:-40%;
+}
+.apuesta_jugador7{
+    left:0; 
+    top:-130%;
+}
+.apuesta_jugador8{
+    left: 50%;
+    top: -130%; 
+}
+.apuesta_jugador9{
+    top: -130%;
+}
+.apuesta_jugador10{
+    right: -40%;
+    top:-40%;
+}
+
+
 #divBotonesHeader p{
     
     color:#fff;
@@ -271,13 +320,18 @@ opacity: 1;
     position: absolute;
     width: 350px;
     height: 90px;
-    top:50%;
-    transform: translateY(-50%);
+    top:32%;
+ 
     left: 25%;
     
     
    
 }
+.pot{
+    bottom: -25%;
+    left: 41%;
+}
+
 .carta1,.carta2,.carta3,.carta4,.carta5{
     border: 1px solid #000;
     border-radius: 5px;
@@ -304,7 +358,23 @@ opacity: 1;
 .carta5{
     left: 80%;
 }
+.fade{
+    -webkit-animation-name: fade;
+    -moz-animation-name: fade;
+    -webkit-animation-duration: 4s;
+    -moz-animation-duration: 4s;
+    animation-name: fade;
+    animation-duration: 4s;
+}
+@-webkit-keyframes fade{
+    from{opacity: .4}
+    to{opacity: 1}
+}
 
+@keyframes fade{
+    from {opacity: .4}
+    to {opacity: 1}
+}
 
 
 

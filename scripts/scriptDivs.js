@@ -50,7 +50,7 @@ function habilitarDivs(divs) {
 
 
   }
-    console.log(posicion);
+console.log(posicion);
   $("#"+jugadores[posicion].div.id+" span").className="boton";
   
   }
