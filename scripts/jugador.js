@@ -91,8 +91,10 @@ $("#btnComenzar").onclick = function(event) {
   turnoiInicial();
 
   //Irvin
-  console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
-  console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
+  //console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
+  //console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
+  console.log("El ganador absoluto es: "+decidirGanador());
+  //decidirGanador();
 };
 
 
@@ -152,7 +154,7 @@ function controladorTurno() {
 
 //Irvin
 function agregarCartaGeneral(iteraciones) {
-  for (var i = 0; i < iteraciones; i++) { //zaldivar
+  for (var f = 0; f < iteraciones; f++) { //zaldivar
     var cartaGeneralAgregada = agregarCarta();
     vectorCartasGenerales.push(cartaGeneralAgregada);
     $(".carta" + contadorCartaGeneral).style.backgroundImage = "url(" + cartaGeneralAgregada.generarRuta() + ")";
