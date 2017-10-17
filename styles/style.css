@@ -114,7 +114,7 @@ body {
 }
 
 .oculto , #oculto{
-  display: none;
+  display: none !important;
 }
 .ocultoInput{
     visibility: hidden;
@@ -376,6 +376,12 @@ opacity: 1;
     to {opacity: 1}
 }
 
+.retirado .divCarta1,.retirado .divCarta2,.retirado .divImagenJugador{
+   filter:grayscale(100%) brightness(30%);
+}
+.divCancelado{
+ background-color: #585858;
+}
 
 
 

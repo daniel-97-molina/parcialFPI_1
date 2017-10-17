@@ -8,7 +8,7 @@ function posicionar(numJugadores) {
       habilitarDivs([2, 4, 8]);
       break;
     case 4:
-      habilitarDivs([2, 4, 7, 8]);
+      habilitarDivs([2, 4, 7, 9]);
       break;
     case 5:
       habilitarDivs([1, 3, 5, 7, 9]);

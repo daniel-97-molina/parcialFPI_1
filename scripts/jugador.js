@@ -6,15 +6,30 @@ var pot = 0;
 var vectorCartasGenerales = [];
 var contadorCartaGeneral = 1;
 var apuestaAnterior = 0;
-var subidaActual=0;
+var subidaActual = 0;
 
 jugador.prototype.apostar = function (monto) {
     this.saldo -= (monto - this.apuesta);
+    pot += (monto - this.apuesta);
     this.apuesta = monto;
+    this.actualizarDiv();
+};
+
+jugador.prototype.evaluar = function () {
+    return ((this.saldo === 0 || this.apuesta === apuestaAnterior) && this.yaJugo);
+};
+
+jugador.prototype.actualizarDiv = function () {
     $("#" + this.div.id + " label").innerHTML = "$" + this.apuesta;
     $("#" + this.div.id + " h5").innerHTML = "$" + this.saldo;
-
 };
+
+jugador.prototype.nuevaRonda = function () {
+    this.apuesta = 0;
+    this.yaJugo = false;
+    this.actualizarDiv();
+};
+
 
 
 function jugador(nombre, saldo) {
@@ -23,10 +38,10 @@ function jugador(nombre, saldo) {
     this.saldo = saldo;
     this.div;
     this.apuesta = 0;
-  
+    this.yaJugo = false;
 
-  
-  //this.div;  //Irvin
+
+    //this.div;  //Irvin
 }
 
 
@@ -63,9 +78,9 @@ function agregarCarta() {
             }
         }
 
-    console.log(cartaAgregada);
-    return cartaAgregada;
-}
+        console.log(cartaAgregada);
+        return cartaAgregada;
+    }
 
 }
 
@@ -77,8 +92,8 @@ function $(query) {
 
 
 
-$(".range").onchange = function () {
-    $("#lblRangeValue").innerHTML = "$" + $(".range").value;
+$("#range").onchange = function () {
+    $("#lblRangeValue").innerHTML = "$" + $("#range").value;
 };
 
 /*-------------------------------------------------------------------------------------------------------------------------*/
@@ -99,12 +114,12 @@ $("#btnComenzar").onclick = function (event) {
     $("#main").className = "main";
     turnoInicial();
 
-  agregarCartaGeneral(5); //zaldivar
+    //agregarCartaGeneral(5); //zaldivar
 
 
-  //Irvin
-  console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
-  console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
+    //Irvin
+    //console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
+    //console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
 };
 
 
@@ -140,21 +155,22 @@ function ciegaMenorMayor(posicionMayor, posicionMenor) {
     menorJugador.apostar(apuestaMinima / 2);
     apuestaAnterior = apuestaMinima;
     subidaActual = apuestaMinima;
-    $(".range").setAttribute("min",subidaActual);
-    $(".range").setAttribute("max",jugadores[turno].saldo);
-    pot = parseFloat(apuestaMinima) + parseFloat(apuestaMinima / 2);
-   // $(".cartasJuego > .pot").innerHTML = "$" + pot;
+    $("#range").setAttribute("min", subidaActual);
+    $("#range").setAttribute("max", jugadores[turno].saldo-apuestaAnterior);
+
+
 }
 
 
 
-function mostrarCartas(id_divJugador) {
+function mostrarCartas(id_divJugador, idAnterior) {
     var idDivAnterior;
     if (turno === 0) {
         idDivAnterior = jugadores[jugadores.length - 1].div.id;
     } else {
         idDivAnterior = jugadores[turno - 1].div.id;
     }
+    idDivAnterior = idAnterior || idDivAnterior;
     $("#" + idDivAnterior + " .divCarta1").style.backgroundImage = "url(cartaVolteada.jpg)";
 
     $("#" + idDivAnterior + " .divCarta2").style.backgroundImage = "url(cartaVolteada.jpg)";
@@ -173,15 +189,30 @@ $("#igualar").onclick = function () {
     controladorTurno();
 };
 $("#subir").onclick = function () {
-    var range = $(".range");
-    
-    subidaActual=range.value;
-    var total = parseFloat(subidaActual)+parseFloat(apuestaAnterior);
-    apuestaAnterior=total;
-    range.setAttribute("min",subidaActual);
-    
-    jugadores[turno].apostar(total);
-   
+    var range = $("#range");
+    if ($("#subir").value === "Subir") {
+
+
+        subidaActual = parseFloat(range.value);
+        var total = subidaActual + parseFloat(apuestaAnterior);
+        apuestaAnterior = total;
+        range.setAttribute("min", subidaActual);
+
+        jugadores[turno].apostar(total);
+
+
+    } else if ($("#subir").value === "All in") {
+        console.log("saldo : " + jugadores[turno].saldo + " apuesta :" + jugadores[turno].apuesta);
+        jugadores[turno].apostar(parseFloat(jugadores[turno].saldo) + parseFloat(jugadores[turno].apuesta));
+    } else {
+        range.setAttribute("min", apuestaMinima);
+//        range.setAttribute("max", jugadores[turno].saldo);
+        $("#igualar").className = "";
+        $("#subir").value = "Subir";
+        $("#pasar").className = "oculto";
+        jugadores[turno].apostar(parseFloat(range.value));
+        apuestaAnterior = parseFloat(range.value);
+    }
     controladorTurno();
 };
 $("#pasar").onclick = function () {
@@ -189,54 +220,109 @@ $("#pasar").onclick = function () {
     controladorTurno();
 };
 $("#retirarme").onclick = function () {
-
+    jugadores[turno].div.className = "retirado divJugador divCancelado";
+    jugadores.splice(turno, 1);
+    if (turno !== 0) {
+        turno--;
+    } else {
+        turno = jugadores.length - 1;
+    }
     controladorTurno();
 };
 
 
 function controladorTurno() {
-    if (jugadores.length !== 0) {
-        jugadores[turno].div.className = "divJugador";
-          
-        if (turno === jugadores.length - 1) {
+    jugadores[turno].yaJugo = true;
+    jugadores[turno].div.className = "divJugador";
+    var contador = 0;
+    for (var i = 0; i < jugadores.length; i++) {
+        if (jugadores[i].evaluar()) {
+            contador++;
+        }
+    }
+    if (contador === jugadores.length) { // ES NUEVA RONDA
+        var turnoTemporal = jugadores[turno].div.id;
+        if (posicion === jugadores.length - 1) {
+            turno = 0;
+        } else {
+            turno = posicion + 1;
+        }
+        console.log("Turno nueva ronda :" + turno);
+        var div_JugadorenJuego = jugadores[turno].div;
+        div_JugadorenJuego.className += " turno";
+        mostrarCartas(div_JugadorenJuego.id, turnoTemporal);
+
+        $("#range").setAttribute("max", jugadores[turno].saldo);
+
+        apuestaAnterior = 0;
+        $(".cartasJuego > .pot").innerHTML = "$" + pot;
+        $("#subir").value = "Apostar";
+        $("#pasar").className = "";
+        $("#igualar").className = "oculto";
+        if (vectorCartasGenerales.length === 0) {
+            agregarCartaGeneral(3);
+        } else {
+            agregarCartaGeneral(1);
+        }
+
+        jugadores.forEach(function (elemento, index, arreglo) {
+            elemento.nuevaRonda();
+        });
+    } else {// SI NO ES NUEVA RONDA
+
+
+        //jugadores[turno].div.className = "divJugador";
+
+
+        if (turno === jugadores.length - 1) {   // CAMBIA DE TURNO
             turno = 0;
         } else {
             turno++;
         }
-        $(".range").setAttribute("max",jugadores[turno].saldo);
+        console.log("turno: " + turno);
+        $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
         var div_JugadorenJuego = jugadores[turno].div;
         div_JugadorenJuego.className += " turno";
         mostrarCartas(div_JugadorenJuego.id);
-        if(jugadores[turno].saldo<apuestaAnterior){
-        $(".range").className="oculto";
-        $("#igualar").className="oculto";
-        $("#subir").setAttribute("value","All in");
-        
-        
-    }else{
-           $(".range").className="range";;
-        $("#igualar").className="";
-        $("#subir").setAttribute("value","Subir"); 
+        //console.log("saldo: "+jugadores[turno].saldo+" -apuestaAnterior :"+apuestaAnterior);
+        if (jugadores[turno].saldo < apuestaAnterior || jugadores[turno].saldo < apuestaMinima) { //SI EBE HACER ALL IN
+            $("#igualar").className = "oculto";
+            console.log($("#igualar").className);
+            $("#range").className = "oculto";
+            $("#subir").value = "All in";
+
+        } else {
+            $("#range").className = "range";
+            $("#igualar").className = "";
+            $("#subir").value = "Subir";
+
+//            if (apuestaAnterior !== 0) {
+//                $("#pasar").className = "oculto";
+//                if (jugadores[turno].saldo !== 0) {
+//                    $("#igualar").className = "";
+//                }
+//            } else {
+//
+//                $("#subir").value = "Apostar";
+//                $("#pasar").className = "";
+//                $("#igualar").className = "oculto";
+//            }
+        }
+
+
+
     }
-  
-    
-    }
+
 }
 
-
-//Irvin
 function agregarCartaGeneral(iteraciones) {
-    for (var i = 0; i < iteraciones; i++) { //zaldivar
+    for (var i = 0; i < iteraciones; i++) {
         var cartaGeneralAgregada = agregarCarta();
         vectorCartasGenerales.push(cartaGeneralAgregada);
         $(".carta" + contadorCartaGeneral).style.backgroundImage = "url(" + cartaGeneralAgregada.generarRuta() + ")";
         contadorCartaGeneral = contadorCartaGeneral + 1;
     }
 }
-
-
-
-
 $("#btnAceptar").onclick = function (event) {
 
     apuestaMinima = $("#txtApuestaMinima").value;
