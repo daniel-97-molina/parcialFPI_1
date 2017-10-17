@@ -33,15 +33,12 @@ jugador.prototype.nuevaRonda = function () {
 
 
 function jugador(nombre, saldo) {
-    this.jugando = true;
     this.nombre = nombre;
     this.saldo = saldo;
     this.div;
     this.apuesta = 0;
     this.yaJugo = false;
 
-
-    //this.div;  //Irvin
 }
 
 
@@ -240,8 +237,13 @@ function controladorTurno() {
             contador++;
         }
     }
-    if (contador === jugadores.length) { // ES NUEVA RONDA
+    if (contador === jugadores.length) {// ES NUEVA RONDA
         var turnoTemporal = jugadores[turno].div.id;
+        if(contadorCartaGeneral===5||jugadores.length===1){
+            for (var i = 0; i < jugadores.length;i++) {
+             combinacionCartasGenerales(i);   
+            }
+        }
         if (posicion === jugadores.length - 1) {
             turno = 0;
         } else {
