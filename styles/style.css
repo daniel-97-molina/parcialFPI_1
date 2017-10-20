@@ -358,23 +358,6 @@ opacity: 1;
 .carta5{
     left: 80%;
 }
-.fade{
-    -webkit-animation-name: fade;
-    -moz-animation-name: fade;
-    -webkit-animation-duration: 4s;
-    -moz-animation-duration: 4s;
-    animation-name: fade;
-    animation-duration: 4s;
-}
-@-webkit-keyframes fade{
-    from{opacity: .4}
-    to{opacity: 1}
-}
-
-@keyframes fade{
-    from {opacity: .4}
-    to {opacity: 1}
-}
 
 .retirado .divCarta1,.retirado .divCarta2,.retirado .divImagenJugador{
    filter:grayscale(100%) brightness(30%);
@@ -388,4 +371,31 @@ opacity: 1;
     
 }
 
+.element {
+  animation: myframes 1s ease 1s;
+  animation-fill-mode: forwards;
+}
 
+
+
+@-webkit-keyframes myframes {
+    from {
+     width: 60px;
+     height:80px
+    }
+    to {
+      width: 80px;
+     height:100px
+    }
+}
+
+@keyframes myframes {
+    from {
+     width: 60px;
+     height:80px
+    }
+    to {
+      width: 80px;
+     height:100px
+    }
+}

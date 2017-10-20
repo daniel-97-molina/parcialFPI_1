@@ -40,34 +40,8 @@ function habilitarDivs(divs) {
 
    $("#"+div.id+" h6").innerHTML=jugadores[i].nombre;
    $("#"+div.id+" h5").innerHTML="$"+jugadores[i].saldo;
+}
 
-
-//  $("#div"+divs[i]+" .divCarta1").style.backgroundImage="url("+jugadores[i].carta1.generarRuta()+")";
-// $("#div"+divs[i]+" .divCarta1").style.display="inline-block";
-//
-//  $("#div"+divs[i]+" .divCarta2").style.backgroundImage="url("+jugadores[i].carta2.generarRuta()+")";
-// $("#div"+divs[i]+" .divCarta2").style.display="inline-block";
-
-
-  }
-console.log(posicion);
   $("#"+jugadores[posicion].div.id+" span").className="boton";
   
   }
-/*si la posicion por ejemplo es: 4 y hay 5 jugadores
-    entonses la variable turno seria turno=posicion + 3;
-    pero entonses seria igual a 6 y el array solo tiene 4 posiciones......que hacer??
-    if(posicion===jugadores.lenght){
-    turno=2;                                
-                                    
-    }
-    if(posicion===jugadores.lenght-1){//es decir si la posicion es 3 y hay 5 jugadores(ultima posicion : 4)
-    turno=1;                  
-                                    
-    }
-    if(posicion===jugadores.lenght-2){//es decir si la posicion es 2 y hay 5 jugadores(ultima posicion : 4)
-    turno=0;
-                                    
-   }
-  
-*/
