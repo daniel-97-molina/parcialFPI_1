@@ -242,12 +242,6 @@ $("#retirarme").onclick = function (event) {
     //console.log("Turno al retirarse: " + turno);
     jugadores[turno].div.className = "retirado divJugador divCancelado";
 
-    jugadores.splice(turno, 1);
-    if (turno !== 0) {
-        turno--;
-    } else {
-        turno = jugadores.length - 1;
-    }
     if (turno <= posicion) {
         if (posicion === 0) {
             posicion = jugadores.length - 1;
@@ -255,6 +249,13 @@ $("#retirarme").onclick = function (event) {
             posicion--;
         }
     }
+    jugadores.splice(turno, 1);
+    if (turno !== 0) {
+        turno--;
+    } else {
+        turno = jugadores.length - 1;
+    }
+    
     console.log("posición: " + posicion);
 //    if (jugadores.length === 1) {
 //        conmutarCartas(jugadores[turno].div.id);
