@@ -1,4 +1,5 @@
 var jugadores = [];
+
 var apuestaMinima = 0;
 var turno = 0;
 var cartasAsignadas = [];
@@ -54,6 +55,7 @@ function add(nombre, saldo) {
     jugadorAgregado.carta2 = agregarCarta();
     jugadores.push(jugadorAgregado);
     
+
 }
 
 
@@ -105,13 +107,14 @@ $("#range").onchange = function () {
 
 
 $("#btnComenzar").onclick = function (event) {
+    
+    
     event.preventDefault();
-
     posicionar(jugadores.length);
 
 
     $("#divPantallaInicial").className = "oculto";
-    $("header div").id = "divBotonesHeader";
+    $("#divBotonesHeader").className = "";
     $("#main").className = "main";
     turnoInicial();
 
@@ -159,7 +162,7 @@ function ciegaMenorMayor(posicionMayor, posicionMenor) {
     menorJugador.apostar(apuestaMinima / 2);
     apuestaAnterior = apuestaMinima;
     subidaActual = apuestaMinima;
-    $("#lblRangeValue").innerHTML=apuestaMinima;//cambio ultimo
+    $("#lblRangeValue").innerHTML = apuestaMinima;//cambio ultimo
     $("#range").setAttribute("min", subidaActual);
     $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
 
@@ -169,7 +172,7 @@ function ciegaMenorMayor(posicionMayor, posicionMenor) {
 
 function conmutarCartas(id_divJugador, idAnterior) {
     var idDivAnterior;
-   
+
     if (turno === 0) {
         idDivAnterior = jugadores[jugadores.length - 1].div.id;
     } else {
@@ -182,10 +185,10 @@ function conmutarCartas(id_divJugador, idAnterior) {
 
     mostrarCartas(id_divJugador);
 }
-function mostrarCartas(id_divJugador,numJugador){
+function mostrarCartas(id_divJugador, numJugador) {
     numJugador = typeof numJugador !== 'undefined' ? numJugador : turno;
-    console.log(numJugador);
-    console.log(jugadores[numJugador].carta1.generarRuta());
+    //console.log(numJugador);
+    //console.log(jugadores[numJugador].carta1.generarRuta());
     $("#" + id_divJugador + " .divCarta1").style.backgroundImage = "url(" + jugadores[numJugador].carta1.generarRuta() + ")";
     $("#" + id_divJugador + " .divCarta2").style.backgroundImage = "url(" + jugadores[numJugador].carta2.generarRuta() + ")";
 }
@@ -214,9 +217,9 @@ $("#subir").onclick = function () {
 
 
     } else if ($("#subir").value === "All in") {
-        console.log("saldo : " + jugadores[turno].saldo + " apuesta :" + jugadores[turno].apuesta);
+        //console.log("saldo : " + jugadores[turno].saldo + " apuesta :" + jugadores[turno].apuesta);
         jugadores[turno].apostar(parseFloat(jugadores[turno].saldo) + parseFloat(jugadores[turno].apuesta));
-    } else {
+    } else { // Si es "Apostar"
         range.setAttribute("min", apuestaMinima);
 //        range.setAttribute("max", jugadores[turno].saldo);
         $("#igualar").className = "";
@@ -236,64 +239,81 @@ $("#pasar").onclick = function () {
 
 
 $("#retirarme").onclick = function (event) {
-    console.log("Turno al retirarse: "+turno);
+    //console.log("Turno al retirarse: " + turno);
     jugadores[turno].div.className = "retirado divJugador divCancelado";
 
     jugadores.splice(turno, 1);
     if (turno !== 0) {
         turno--;
-    }else{
-        turno=jugadores.length-1;
-    }
-    if(posicion===0){
-        posicion=jugadores.length-1;
-    }else{
-    posicion--;
-    }
-    if (jugadores.length === 1) {
-        conmutarCartas(jugadores[turno].div.id);
-        jugadores[turno].div.className += " turno ganador";
     } else {
-        controladorTurno();
+        turno = jugadores.length - 1;
     }
+    if (turno <= posicion) {
+        if (posicion === 0) {
+            posicion = jugadores.length - 1;
+        } else {
+            posicion--;
+        }
+    }
+    console.log("posición: " + posicion);
+//    if (jugadores.length === 1) {
+//        conmutarCartas(jugadores[turno].div.id);
+//        //jugadores[turno].div.className += " turno ganador";
+//    } else {
+    controladorTurno();
+//    }
 };
 
 
 function controladorTurno() {
-    console.log("contador" + contadorCartaGeneral);
+
     jugadores[turno].yaJugo = true;
     jugadores[turno].div.className = "divJugador";
+    // CONTADOR SIRVE PARA VERIFICAR SI TODOS LOS JUGADORES ESTÁN LISTOS PARA PASAR A LA SIGUIENTE RONDA
     var contador = 0;
     for (var i = 0; i < jugadores.length; i++) {
         if (jugadores[i].evaluar()) {
             contador++;
         }
     }
-    if (contadorCartaGeneral > 5 || jugadores.length === 1) {//final juego
 
+    if (contador === jugadores.length) {// ES NUEVA RONDA
+        $("#range").setAttribute("min", apuestaMinima);
+        if (jugadores.length === 1) { //Ganador por default
+            $("#divBotonesHeader").className = "oculto";
+            jugadores[0].div.className += " turno ganador";
+            $("#" + jugadores[0].div.id + " .divCarta1").className += " element";
+            $("#" + jugadores[0].div.id + " .divCarta2").className += " element";
+            mostrarCartas(jugadores[0].div.id);
+            $("#btnJugarOtraMano").className = "";
+            $("#divBotonesHeader");
+            return;
+        }
+
+        if (contadorCartaGeneral > 5) {//final juego
+            $("#btnJugarOtraMano").className = "";
             var ganadores = decidirGanador();
             for (var i = 0; i < ganadores.length; i++) {
                 //mostrarCartas(jugadores[i].div.id);
                 jugadores[i].div.className += " turno ganador";
-                $("#"+jugadores[i].div.id+" .divCarta1").className+=" element";
-                $("#"+jugadores[i].div.id+" .divCarta2").className+=" element";
+                $("#" + jugadores[i].div.id + " .divCarta1").className += " element";
+                $("#" + jugadores[i].div.id + " .divCarta2").className += " element";
             }
 
-            $("header > div").className="oculto";
-                for (var i = 0; i < jugadores.length; i++) {
-                    console.log("iteracion: "+i);
-            mostrarCartas(jugadores[i].div.id,i);
+            $("#divBotonesHeader").className = "oculto";
+            for (var i = 0; i < jugadores.length; i++) {
+                //console.log("iteracion: " + i);
+                mostrarCartas(jugadores[i].div.id, i);
+            }
+            setTimeout(mostrarGanador, 4000);
+            return;
+
         }
-        setTimeout(mostrarGanador,4000);
-        return;
-            
-    }
-    if (contador === jugadores.length) {// ES NUEVA RONDA
         var turnoTemporal = jugadores[turno].div.id;
-        
+
         if (posicion === jugadores.length - 1) {
             turno = 0;
-        } else{
+        } else {
             turno = posicion + 1;
         }
         console.log("Turno nueva ronda :" + turno);
@@ -327,7 +347,7 @@ function controladorTurno() {
         } else {
             turno++;
         }
-        console.log("turno: " + turno);
+        console.log("turno despues de cambiar: " + turno);
         setNombreJugador();
         $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
         var div_JugadorenJuego = jugadores[turno].div;
@@ -336,15 +356,15 @@ function controladorTurno() {
         //console.log("saldo: "+jugadores[turno].saldo+" -apuestaAnterior :"+apuestaAnterior);
         if (jugadores[turno].saldo < apuestaAnterior || jugadores[turno].saldo < apuestaMinima) { //SI EBE HACER ALL IN
             $("#igualar").className = "oculto";
-            console.log($("#igualar").className);
+            //console.log($("#igualar").className);
             $("#range").className = "oculto";
             $("#subir").value = "All in";
 
-        } else if(apuestaAnterior===0){
-            
-            $("#igualar").className="oculto";
+        } else if (apuestaAnterior === 0) {
 
-        }else{
+            $("#igualar").className = "oculto";
+
+        } else {
             $("#range").className = "range";
             $("#igualar").className = "";
             $("#subir").value = "Subir";
@@ -385,7 +405,7 @@ $("#btnAceptar").onclick = function (event) {
 
 
 $("#btnAgregarJugador").onclick = function (event) {
-
+    
     var sNombre = $("#txtNombre").value;
     var iDinero = $("#txtDinero").value;
     var error = false;
@@ -415,58 +435,89 @@ $("#btnAgregarJugador").onclick = function (event) {
 
     }
     $("#txtNombre").focus();
+    
+    if(jugadores.length === 10){
+        $("#btnAgregarJugador").className="disabled";
+        $("#btnAgregarJugador").setAttribute("disabled","");
+    }
+    
 };
 
 
-function mostrarGanador(){
+function mostrarGanador() {
     var indicesGanadores = decidirGanador();
     $("#divPantallaInicial").className = "divPantallaInicial";
     $("#divContenedorPantallaInicial").className = "oculto";
     $("#main").className = "oculto";
-    
-    if(indicesGanadores.length === 1){
-        $("#tituloGanadores").innerHTML = "Ganador de la mano: "+jugadores[indicesGanadores[0]].nombre;
-    }else{
+
+    if (indicesGanadores.length === 1) {
+        $("#tituloGanadores").innerHTML = "Ganador de la mano: " + jugadores[indicesGanadores[0]].nombre;
+    } else {
         $("#tituloGanadores").innerHTML = "¡Empate!";
     }
-    for(var i = 0; i < indicesGanadores.length; i++){
+    for (var i = 0; i < indicesGanadores.length; i++) {
         generarDivFinal(jugadores[indicesGanadores[i]], true);
     }
-    for(var i = 0; i < jugadores.length; i++){
-        if(indicesGanadores.indexOf(i)=== -1){
+    for (var i = 0; i < jugadores.length; i++) {
+        if (indicesGanadores.indexOf(i) === -1) {
             generarDivFinal(jugadores[i]);
         }
     }
-};
+}
+;
 
-function generarDivFinal(jugador, ganador){
+function generarDivFinal(jugador, ganador) {
     var sMano;
-    switch(jugador.manoGanadora){
-        case 1: sMano = "Carta Alta";break;
-        case 2: sMano = "Parejas";break;
-        case 3: sMano = "Dobles Parejas";break;
-        case 4: sMano = "Trío";break;
-        case 5: sMano = "Escalera";break;
-        case 6: sMano = "Color";break;
-        case 7: sMano = "Full";break;
-        case 8: sMano = "Póker";break;
-        case 9: sMano = "Escalera de Color";break;
-        case 10: sMano = "Escalera Real de Color";break;
+    switch (jugador.manoGanadora) {
+        case 1:
+            sMano = "Carta Alta";
+            break;
+        case 2:
+            sMano = "Parejas";
+            break;
+        case 3:
+            sMano = "Dobles Parejas";
+            break;
+        case 4:
+            sMano = "Trío";
+            break;
+        case 5:
+            sMano = "Escalera";
+            break;
+        case 6:
+            sMano = "Color";
+            break;
+        case 7:
+            sMano = "Full";
+            break;
+        case 8:
+            sMano = "Póker";
+            break;
+        case 9:
+            sMano = "Escalera de Color";
+            break;
+        case 10:
+            sMano = "Escalera Real de Color";
+            break;
     }
     var div = document.createElement("div");
-    var texto = document.createTextNode(jugador.nombre+"  -  Saldo: $"+jugador.saldo+"  -  Mejor mano: "+sMano);
+    var texto = document.createTextNode(jugador.nombre + "  -  Saldo: $" + jugador.saldo + "  -  Mejor mano: " + sMano);
     var nodo = document.createElement("p");
     nodo.appendChild(texto);
     div.appendChild(nodo);
-    for(var i = 0; i< 5; i++){
+    for (var i = 0; i < 5; i++) {
         var img = document.createElement("img");
-        img.setAttribute("src",jugador.objetosCarta[i].generarRuta());
+        img.setAttribute("src", jugador.objetosCarta[i].generarRuta());
         div.appendChild(img);
     }
-    if(ganador){
+    if (ganador) {
         var span = document.createElement("span");
         div.appendChild(span);
     }
     $("#divGanadores").appendChild(div);
-    
+
 }
+
+$("#btnJugarOtraMano").onclick = function () {
+    window.location.reload();
+};
