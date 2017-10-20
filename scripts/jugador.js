@@ -12,17 +12,21 @@ jugador.prototype.apostar = function (monto) {
     this.saldo -= (monto - this.apuesta);
     pot += (monto - this.apuesta);
     this.apuesta = monto;
+
     this.actualizarDiv();
 };
+
 
 jugador.prototype.evaluar = function () {
     return ((this.saldo === 0 || this.apuesta === apuestaAnterior) && this.yaJugo);
 };
 
+
 jugador.prototype.actualizarDiv = function () {
     $("#" + this.div.id + " label").innerHTML = "$" + this.apuesta;
     $("#" + this.div.id + " h5").innerHTML = "$" + this.saldo;
 };
+
 
 jugador.prototype.nuevaRonda = function () {
     this.apuesta = 0;
@@ -35,10 +39,10 @@ jugador.prototype.nuevaRonda = function () {
 function jugador(nombre, saldo) {
     this.nombre = nombre;
     this.saldo = saldo;
-    this.div;
     this.apuesta = 0;
     this.yaJugo = false;
 
+    //this.div;  //Irvin
 }
 
 
@@ -55,18 +59,19 @@ function add(nombre, saldo) {
 function agregarCarta() {
     var asignada = false;
     var contador = 0;
+    var cartaAgregada;
     var numCartas = cartasAsignadas.length;
     while (asignada === false) {
         contador = 0;
         numCartas = cartasAsignadas.length;
-        var cartaAgregada = new Cartas();
+        cartaAgregada = new Cartas();
         if (numCartas === 0) {
             cartasAsignadas.push(cartaAgregada);
             asignada = true;
         } else {
             for (var i = 0; i < numCartas; i++) {
                 if (cartasAsignadas[i].carta !== cartaAgregada.carta) {
-                    contador = contador + 1;
+                    contador++;
                 }
             }
             if (contador === numCartas) {
@@ -74,17 +79,15 @@ function agregarCarta() {
                 asignada = true;
             }
         }
-
-        console.log(cartaAgregada);
-        return cartaAgregada;
+        //return cartaAgregada;
     }
+    return cartaAgregada;
 
 }
 
+
 function $(query) {
-
     return document.querySelector(query);
-
 }
 
 
@@ -113,10 +116,9 @@ $("#btnComenzar").onclick = function (event) {
 
     //agregarCartaGeneral(5); //zaldivar
 
-
     //Irvin
-    //console.log("Jugador 0 mejor combinación: " + combinacionCartasGenerales(0));
-    //console.log("Jugador 1 mejor combinación: " + combinacionCartasGenerales(1));
+    //console.log("El ganador absoluto es: "+decidirGanador());
+
 };
 
 
@@ -141,7 +143,13 @@ function turnoInicial() {
     var div_JugadorenJuego = jugadores[turno].div;
     div_JugadorenJuego.className += " turno";
     mostrarCartas(div_JugadorenJuego.id);
+
 }
+function setNombreJugador() {
+    $("#jugadorActual").innerHTML = jugadores[turno].nombre;
+
+}
+
 
 function ciegaMenorMayor(posicionMayor, posicionMenor) {
 //    var mayor = jugadores[posicionMayor].div.id;
@@ -153,8 +161,7 @@ function ciegaMenorMayor(posicionMayor, posicionMenor) {
     apuestaAnterior = apuestaMinima;
     subidaActual = apuestaMinima;
     $("#range").setAttribute("min", subidaActual);
-    $("#range").setAttribute("max", jugadores[turno].saldo-apuestaAnterior);
-
+    $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
 
 }
 
@@ -168,9 +175,9 @@ function mostrarCartas(id_divJugador, idAnterior) {
         idDivAnterior = jugadores[turno - 1].div.id;
     }
     idDivAnterior = idAnterior || idDivAnterior;
-    $("#" + idDivAnterior + " .divCarta1").style.backgroundImage = "url(cartaVolteada.jpg)";
+    $("#" + idDivAnterior + " .divCarta1").style.backgroundImage = "url(images/cartaVolteada.jpg)";
 
-    $("#" + idDivAnterior + " .divCarta2").style.backgroundImage = "url(cartaVolteada.jpg)";
+    $("#" + idDivAnterior + " .divCarta2").style.backgroundImage = "url(images/cartaVolteada.jpg)";
 
     $("#" + id_divJugador + " .divCarta1").style.backgroundImage = "url(" + jugadores[turno].carta1.generarRuta() + ")";
     $("#" + id_divJugador + " .divCarta2").style.backgroundImage = "url(" + jugadores[turno].carta2.generarRuta() + ")";
@@ -185,6 +192,8 @@ $("#igualar").onclick = function () {
 
     controladorTurno();
 };
+
+
 $("#subir").onclick = function () {
     var range = $("#range");
     if ($("#subir").value === "Subir") {
@@ -212,23 +221,34 @@ $("#subir").onclick = function () {
     }
     controladorTurno();
 };
+
+
 $("#pasar").onclick = function () {
 
     controladorTurno();
 };
-$("#retirarme").onclick = function () {
+
+
+$("#retirarme").onclick = function (event) {
     jugadores[turno].div.className = "retirado divJugador divCancelado";
+
     jugadores.splice(turno, 1);
     if (turno !== 0) {
         turno--;
     } else {
         turno = jugadores.length - 1;
     }
-    controladorTurno();
+    if (jugadores.length === 1) {
+        mostrarCartas(jugadores[turno].div.id);
+        jugadores[turno].div.className += " turno ganador";
+    } else {
+        controladorTurno();
+    }
 };
 
 
 function controladorTurno() {
+    console.log("contador" + contadorCartaGeneral);
     jugadores[turno].yaJugo = true;
     jugadores[turno].div.className = "divJugador";
     var contador = 0;
@@ -239,10 +259,18 @@ function controladorTurno() {
     }
     if (contador === jugadores.length) {// ES NUEVA RONDA
         var turnoTemporal = jugadores[turno].div.id;
-        if(contadorCartaGeneral===5||jugadores.length===1){
-            for (var i = 0; i < jugadores.length;i++) {
-             combinacionCartasGenerales(i);   
+        if (contadorCartaGeneral > 5 || jugadores.length === 1) {//final juego
+
+            var ganadores = decidirGanador();
+            for (var i = 0; i < ganadores.length; i++) {
+                //mostrarCartas(jugadores[i].div.id);
+                jugadores[i].div.className += " turno ganador";
             }
+
+            //console.log("Jugador["+i+"]-Combinacion :"+combinacionCartasGenerales(i)); 
+
+
+            console.log(jugadores[turno]);
         }
         if (posicion === jugadores.length - 1) {
             turno = 0;
@@ -270,11 +298,10 @@ function controladorTurno() {
         jugadores.forEach(function (elemento, index, arreglo) {
             elemento.nuevaRonda();
         });
+        setNombreJugador();
     } else {// SI NO ES NUEVA RONDA
 
-
         //jugadores[turno].div.className = "divJugador";
-
 
         if (turno === jugadores.length - 1) {   // CAMBIA DE TURNO
             turno = 0;
@@ -282,6 +309,7 @@ function controladorTurno() {
             turno++;
         }
         console.log("turno: " + turno);
+        setNombreJugador();
         $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
         var div_JugadorenJuego = jugadores[turno].div;
         div_JugadorenJuego.className += " turno";
@@ -310,8 +338,6 @@ function controladorTurno() {
 //                $("#igualar").className = "oculto";
 //            }
         }
-
-
 
     }
 
@@ -343,6 +369,8 @@ $("#btnAceptar").onclick = function (event) {
 
     }
 };
+
+
 
 
 $("#btnAgregarJugador").onclick = function (event) {

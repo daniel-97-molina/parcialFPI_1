@@ -13,7 +13,7 @@ header {
 #divBotonesHeader{
 position: absolute;
 
-width: 26%;
+width: 400px;
 height:100%;
 right: 0;
 top:0;
@@ -226,7 +226,7 @@ opacity: 1;
     height: 70px;
     width: 70px;
     border-radius: 50%; 
-    background-image: url("../animado.jpg");
+    background-image: url("../images/animado.jpg");
     background-size: contain;
     position: relative;
     right: 20px;
@@ -257,7 +257,7 @@ opacity: 1;
     width: 60px;
     position: relative;
     bottom: 90%;
-    background-image: url(../cartaVolteada.jpg);
+    background-image: url(../images/cartaVolteada.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     display: inline-block;
@@ -269,7 +269,7 @@ opacity: 1;
     position: absolute;
     border-radius: 50%;
     background-size: cover;
-    background-image: url("../botonTurno.jpg");
+    background-image: url("../images/dealer.jpg");
     bottom: 70%;
     left: 80%;
     border: 1px solid #000;
@@ -383,6 +383,9 @@ opacity: 1;
  background-color: #585858;
 }
 
-
+.ganador{
+    box-shadow: 0 0 30px aqua;
+    
+}
 
 
