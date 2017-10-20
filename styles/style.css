@@ -232,14 +232,45 @@ opacity: 1;
     height: 70px;
     width: 70px;
     border-radius: 50%; 
-    background-image: url("../images/animado.jpg");
-    background-size: contain;
+  background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
     right: 20px;
     bottom: 7px;
     border: 1px solid #000;
     
  
+}
+#div1 > .divImagenJugador{
+   background-image: url("../images/animado1.jpeg"); 
+}
+#div2 > .divImagenJugador{
+   background-image: url("../images/animado2.jpeg"); 
+}
+#div3 > .divImagenJugador{
+   background-image: url("../images/animado4.jpg"); 
+}
+#div4 > .divImagenJugador{
+   background-image: url("../images/animado5.jpg"); 
+}
+#div5 > .divImagenJugador{
+   background-image: url("../images/animado6.jpeg"); 
+}
+#div6 > .divImagenJugador{
+   background-image: url("../images/animado7.jpeg"); 
+}
+#div7 > .divImagenJugador{
+   background-image: url("../images/animado8.jpeg"); 
+}
+#div8 > .divImagenJugador{
+   background-image: url("../images/animado9.jpeg"); 
+}
+#div9 > .divImagenJugador{
+   background-image: url("../images/animado10.jpg"); 
+}
+
+#div10 > .divImagenJugador{
+   background-image: url("../images/animado11.jpeg"); 
 }
 .divInformacionJugador{
     display: inline-block;
@@ -378,7 +409,9 @@ opacity: 1;
 }
 
 .element {
-  animation: myframes 1s ease 1s;
+  -webkit-animation: myframes 1s ease;  
+  -moz-animation: myframes 1s ease;  
+  animation: myframes 1s ease;
   animation-fill-mode: forwards;
 }
 
@@ -438,4 +471,21 @@ opacity: 1;
     position: absolute;
     left: 530px;
     
+}
+.fade{
+    -webkit-animation-name: fade;
+    -moz-animation-name: fade;
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    animation-name: fade;
+    animation-duration: 3s;
+}
+@-webkit-keyframes fade{
+    from{opacity: 0}
+    to{opacity: 1}
+}
+
+@keyframes fade{
+    from {opacity: 0}
+    to {opacity: 1}
 }
