@@ -42,8 +42,6 @@ function jugador(nombre, saldo) {
     this.saldo = saldo;
     this.apuesta = 0;
     this.yaJugo = false;
-
-    //this.div;  //Irvin
 }
 
 
@@ -54,8 +52,6 @@ function add(nombre, saldo) {
     jugadorAgregado.carta1 = agregarCarta();
     jugadorAgregado.carta2 = agregarCarta();
     jugadores.push(jugadorAgregado);
-
-
 }
 
 
@@ -85,7 +81,6 @@ function agregarCarta() {
         //return cartaAgregada;
     }
     return cartaAgregada;
-
 }
 
 
@@ -117,11 +112,6 @@ $("#btnComenzar").onclick = function (event) {
     $("#divBotonesHeader").className = "";
     $("#main").className = "main";
     turnoInicial();
-
-    //agregarCartaGeneral(5); //zaldivar
-
-    //Irvin
-    ////console.log("El ganador absoluto es: "+decidirGanador());
 
 };
 
