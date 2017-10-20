@@ -53,7 +53,7 @@ function add(nombre, saldo) {
     jugadorAgregado.carta1 = agregarCarta();
     jugadorAgregado.carta2 = agregarCarta();
     jugadores.push(jugadorAgregado);
-    
+
 }
 
 
@@ -118,7 +118,7 @@ $("#btnComenzar").onclick = function (event) {
     //agregarCartaGeneral(5); //zaldivar
 
     //Irvin
-    //console.log("El ganador absoluto es: "+decidirGanador());
+    ////console.log("El ganador absoluto es: "+decidirGanador());
 
 };
 
@@ -169,7 +169,7 @@ function ciegaMenorMayor(posicionMayor, posicionMenor) {
 
 function conmutarCartas(id_divJugador, idAnterior) {
     var idDivAnterior;
-   
+
     if (turno === 0) {
         idDivAnterior = jugadores[jugadores.length - 1].div.id;
     } else {
@@ -184,8 +184,8 @@ function conmutarCartas(id_divJugador, idAnterior) {
 }
 function mostrarCartas(id_divJugador,numJugador){
     numJugador = typeof numJugador !== 'undefined' ? numJugador : turno;
-    console.log(numJugador);
-    console.log(jugadores[numJugador].carta1.generarRuta());
+    //console.log(numJugador);
+    //console.log(jugadores[numJugador].carta1.generarRuta());
     $("#" + id_divJugador + " .divCarta1").style.backgroundImage = "url(" + jugadores[numJugador].carta1.generarRuta() + ")";
     $("#" + id_divJugador + " .divCarta2").style.backgroundImage = "url(" + jugadores[numJugador].carta2.generarRuta() + ")";
 }
@@ -214,7 +214,7 @@ $("#subir").onclick = function () {
 
 
     } else if ($("#subir").value === "All in") {
-        console.log("saldo : " + jugadores[turno].saldo + " apuesta :" + jugadores[turno].apuesta);
+        //console.log("saldo : " + jugadores[turno].saldo + " apuesta :" + jugadores[turno].apuesta);
         jugadores[turno].apostar(parseFloat(jugadores[turno].saldo) + parseFloat(jugadores[turno].apuesta));
     } else {
         range.setAttribute("min", apuestaMinima);
@@ -236,7 +236,7 @@ $("#pasar").onclick = function () {
 
 
 $("#retirarme").onclick = function (event) {
-    console.log("Turno al retirarse: "+turno);
+    //console.log("Turno al retirarse: "+turno);
     jugadores[turno].div.className = "retirado divJugador divCancelado";
 
     jugadores.splice(turno, 1);
@@ -260,7 +260,7 @@ $("#retirarme").onclick = function (event) {
 
 
 function controladorTurno() {
-    console.log("contador" + contadorCartaGeneral);
+    //console.log("contador" + contadorCartaGeneral);
     jugadores[turno].yaJugo = true;
     jugadores[turno].div.className = "divJugador";
     var contador = 0;
@@ -281,21 +281,21 @@ function controladorTurno() {
 
             $("header > div").className="oculto";
                 for (var i = 0; i < jugadores.length; i++) {
-                    console.log("iteracion: "+i);
+                    //console.log("iteracion: "+i);
             mostrarCartas(jugadores[i].div.id,i);
         }
 return;
-            
+
         }
     if (contador === jugadores.length) {// ES NUEVA RONDA
         var turnoTemporal = jugadores[turno].div.id;
-        
+
         if (posicion === jugadores.length - 1) {
             turno = 0;
         } else{
             turno = posicion + 1;
         }
-        console.log("Turno nueva ronda :" + turno);
+        //console.log("Turno nueva ronda :" + turno);
         var div_JugadorenJuego = jugadores[turno].div;
         div_JugadorenJuego.className += " turno";
         conmutarCartas(div_JugadorenJuego.id, turnoTemporal);
@@ -326,21 +326,21 @@ return;
         } else {
             turno++;
         }
-        console.log("turno: " + turno);
+        //console.log("turno: " + turno);
         setNombreJugador();
         $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
         var div_JugadorenJuego = jugadores[turno].div;
         div_JugadorenJuego.className += " turno";
         conmutarCartas(div_JugadorenJuego.id);
-        //console.log("saldo: "+jugadores[turno].saldo+" -apuestaAnterior :"+apuestaAnterior);
+        ////console.log("saldo: "+jugadores[turno].saldo+" -apuestaAnterior :"+apuestaAnterior);
         if (jugadores[turno].saldo < apuestaAnterior || jugadores[turno].saldo < apuestaMinima) { //SI EBE HACER ALL IN
             $("#igualar").className = "oculto";
-            console.log($("#igualar").className);
+            //console.log($("#igualar").className);
             $("#range").className = "oculto";
             $("#subir").value = "All in";
 
         } else if(apuestaAnterior===0){
-            
+
             $("#igualar").className="oculto";
 
         }else{

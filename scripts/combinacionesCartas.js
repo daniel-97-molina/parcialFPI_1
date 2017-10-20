@@ -1,11 +1,12 @@
 //Metodo para establecer las 10 formas diferentes como se puede tomar 3 de las 5 cartas comunes
 //Devuelve la mejor de las combinaciones de cartas que se pudo formar de todas por jugador
 function combinacionCartasGenerales(posicionJugador) {
-  var resultadoCombinaciones = [];///////////////////YA NO SE USA
+  var resultadoCombinaciones = []; ///////////////////YA NO SE USA
   var mejorCombinacion = 0;
   //Creadas despues
   var arrayTodasLasCombinaciones = [];
   var arrayCartasJugador = [];
+  var objetosCarta = [];
   var posicion;
 
   arrayTodasLasCombinaciones[0] = [0, 1, 2, posicionJugador];
@@ -26,13 +27,16 @@ function combinacionCartasGenerales(posicionJugador) {
       posicion = i;
     }
     arrayCartasJugador[i] = [vectorCartasGenerales[(arrayTodasLasCombinaciones[i][0])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][1])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][2])].numero, jugadores[posicionJugador].carta1.numero, jugadores[posicionJugador].carta2.numero];
+    objetosCarta[i] = [vectorCartasGenerales[(arrayTodasLasCombinaciones[i][0])], vectorCartasGenerales[(arrayTodasLasCombinaciones[i][1])], vectorCartasGenerales[(arrayTodasLasCombinaciones[i][2])], jugadores[posicionJugador].carta1, jugadores[posicionJugador].carta2];
   }
 
   //Agregado despues
-  for (var t = 0; t < jugadores.length; t++) {
-    jugadores[t].combinacionCartas = arrayCartasJugador[posicion];
-  }
-
+  //for (var t = 0; t < jugadores.length; t++) {
+  jugadores[posicionJugador].combinacionCartas = arrayCartasJugador[posicion];
+  jugadores[posicionJugador].objetosCarta = objetosCarta[posicion];
+  //  }
+  //console.log(jugadores[posicionJugador].combinacionCartas);
+  //console.log(jugadores[posicionJugador].objetosCarta);
   return mejorCombinacion;
 }
 
