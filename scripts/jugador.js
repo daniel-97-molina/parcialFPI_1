@@ -284,9 +284,10 @@ function controladorTurno() {
                     //console.log("iteracion: "+i);
             mostrarCartas(jugadores[i].div.id,i);
         }
-return;
+        setTimeout(mostrarGanador,4000);
+        return;
 
-        }
+    }
     if (contador === jugadores.length) {// ES NUEVA RONDA
         var turnoTemporal = jugadores[turno].div.id;
 
@@ -400,7 +401,7 @@ $("#btnAgregarJugador").onclick = function (event) {
         var nodo = document.createElement("p");
         nodo.appendChild(texto);
         add(sNombre, iDinero);
-        $("#divPantallaInicial").appendChild(nodo);
+        $("#divContenedorPantallaInicial").appendChild(nodo);
         $("#txtDinero").className = "bordeNormal";
         $("#txtDinero").className = "bordeNormal";
 
@@ -415,3 +416,57 @@ $("#btnAgregarJugador").onclick = function (event) {
     }
     $("#txtNombre").focus();
 };
+
+
+function mostrarGanador(){
+    var indicesGanadores = decidirGanador();
+    $("#divPantallaInicial").className = "divPantallaInicial";
+    $("#divContenedorPantallaInicial").className = "oculto";
+    $("#main").className = "oculto";
+
+    if(indicesGanadores.length === 1){
+        $("#tituloGanadores").innerHTML = "Ganador de la mano: "+jugadores[indicesGanadores[0]].nombre;
+    }else{
+        $("#tituloGanadores").innerHTML = "¡Empate!";
+    }
+    for(var i = 0; i < indicesGanadores.length; i++){
+        generarDivFinal(jugadores[indicesGanadores[i]], true);
+    }
+    for(var i = 0; i < jugadores.length; i++){
+        if(indicesGanadores.indexOf(i)=== -1){
+            generarDivFinal(jugadores[i]);
+        }
+    }
+};
+
+function generarDivFinal(jugador, ganador){
+    var sMano;
+    switch(jugador.manoGanadora){
+        case 1: sMano = "Carta Alta";break;
+        case 2: sMano = "Parejas";break;
+        case 3: sMano = "Dobles Parejas";break;
+        case 4: sMano = "Trío";break;
+        case 5: sMano = "Escalera";break;
+        case 6: sMano = "Color";break;
+        case 7: sMano = "Full";break;
+        case 8: sMano = "Póker";break;
+        case 9: sMano = "Escalera de Color";break;
+        case 10: sMano = "Escalera Real de Color";break;
+    }
+    var div = document.createElement("div");
+    var texto = document.createTextNode(jugador.nombre+"  -  Saldo: $"+jugador.saldo+"  -  Mejor mano: "+sMano);
+    var nodo = document.createElement("p");
+    nodo.appendChild(texto);
+    div.appendChild(nodo);
+    for(var i = 0; i< 5; i++){
+        var img = document.createElement("img");
+        img.setAttribute("src",jugador.objetosCarta[i].generarRuta());
+        div.appendChild(img);
+    }
+    if(ganador){
+        var span = document.createElement("span");
+        div.appendChild(span);
+    }
+    $("#divGanadores").appendChild(div);
+
+}

@@ -109,7 +109,7 @@ function posiblesCombinaciones(vectorCombinaciones) {
   var cuantosTrios = 0;
   for (var n = 0; n < arrayNumerosCartas.length; n++) {
     var valorActual = arrayNumerosCartas[n];
-    for (m = 0; m < arrayNumerosCartas.length; m++) {
+    for (var m = 0; m < arrayNumerosCartas.length; m++) {
       if (valorActual === arrayNumerosCartas[m]) {
         contador++;
       }
@@ -147,6 +147,8 @@ function posiblesCombinaciones(vectorCombinaciones) {
     combinacionGanadora = 5;
   } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros) || /(110111213)$/.test(cadenaNumeros)) {
     combinacionGanadora = 5;
+  } else if (/(12111213)$/.test(cadenaNumeros) || /(1231213)$/.test(cadenaNumeros) || /(123413)$/.test(cadenaNumeros)) {
+    combinacionGanadora = 5;
   }
 
 
@@ -165,7 +167,9 @@ function posiblesCombinaciones(vectorCombinaciones) {
       combinacionGanadora = 9;
     } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros)) {
       combinacionGanadora = 9;
-    } else if (/(110111213)$/.test(cadenaNumeros)) {
+    } else if (/(12111213)$/.test(cadenaNumeros) || /(1231213)$/.test(cadenaNumeros) || /(123413)$/.test(cadenaNumeros)) {
+      combinacionGanadora = 9;
+    }else if (/(110111213)$/.test(cadenaNumeros)) {
       combinacionGanadora = 10;
     }
   }

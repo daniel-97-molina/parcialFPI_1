@@ -33,96 +33,76 @@ function decidirGanador() {
     return decidirGanadorEmpate(arrayPosiciones);
   }
   //return arrayPosiciones;
-
 }
 
 
 
-/* mejorCombinacionPorJugador[] es el vector que guarda la mejor combinacion para cada jugador
-(la mayor es el ganadorDefinitivo si solo hay un jugador)
-El arrary arrayPosicionesGanadores[] es el array que guarda la posicion de todos los jugadores ganadores que tiene empate */
-
 
 function decidirGanadorEmpate(arrayPosicionesGanadores) {
-  var arrayEnCasoEmpate = []; //ya no la uso
   var cartaMayor = 0;
   var ganadorDefinitivo = [];
+  var existeAS = false;
+  var arrayPosiciones = [];
 
-
-  //REVISAR SI ESTO ES NECESARIO
-  //for (var i = 0; i < jugadores.length; i++) {
-  //  combinacionCartasGenerales(i);
-  //    arrayEnCasoEmpate[i] = jugadores[i].combinacionCartas;
-  //  }
+  //Nuevas
+  var valorCarta = [];
+  var mayor = 0;
+  var contador = 0;
+  var cuantasParejas = 0;
+  var cuantosTrios = 0;
 
 
   //Por si hay empate en alguna de la 10 combinaciones ganadoras
   switch (mejorCombinacionPorJugador[arrayPosicionesGanadores[0]]) {
     case 1:
-      for (var x = 0; x < arrayPosicionesGanadores.length; x++) {
-
-        jugadores[arrayPosicionesGanadores[x]].combinacionCartas.sort(function(a, b) {
-          return b - a;
-        });
-
-        if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[posicionDeCarta] > cartaMayor) {
-          cartaMayor = jugadores[arrayPosicionesGanadores[x]].combinacionCartas[posicionDeCarta];
-          ganadorDefinitivo[0] = arrayPosicionesGanadores[x];
-        } else if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[4] === 1) {
-          //cartaMayor = jugadores[arrayPosicionesGanadores[x]].combinacionCartas[4];
-          ganadorDefinitivo[0] = arrayPosicionesGanadores[x];
-        }
-
-      }
-      contadorGanadores(mejorCombinacionPorJugador[aganadorDefinitivo[0]]);
+      //COMBINACION 1: Carta más alta
+      evaluarCartaMayor15();
       break;
 
     case 2:
-      contadorGanadores(ganadorDefinitivo[0]);
+      //COMBINACION 2: Pareja
+      evaluarCartaMayor23478();
+      //evaluarCartaMayor24(2);
       break;
 
     case 3:
-      contadorGanadores(ganadorDefinitivo[0]);
+      //COMBINACION 3: Doble pareja
+      evaluarCartaMayor23478();
       break;
 
     case 4:
-      contadorGanadores(ganadorDefinitivo[0]);
+      //COMBINACION 4: Trío
+      evaluarCartaMayor23478();
+      //evaluarCartaMayor24(3);
       break;
 
     case 5:
-      evaluarCartaMayor(0);
-      contadorGanadores(ganadorDefinitivo[0]);
+      //COMBINACION 5: Escalera
+      evaluarCartaMayor15();
       break;
+
     case 6:
-      evaluarCartaMayor(0);
-      contadorGanadores(ganadorDefinitivo[0]);
+      //COMBINACION 6: Misma amilia
+      evaluarCartaMayor69();
       break;
+
     case 7:
-      contadorGanadores(ganadorDefinitivo[0]);
+      //COMBINACION 7: Full
+      evaluarCartaMayor23478();
       break;
+
     case 8:
-      contadorGanadores(ganadorDefinitivo[0]);
+      //COMBINACION 8: Poker
+      evaluarCartaMayor23478();
       break;
+
     case 9:
       //COMBINACION 9:Escalera familia
-      //5 cartas consecutivas del misma familia
-      for (var x = 0; x < arrayPosicionesGanadores.length; x++) {
-
-        jugadores[arrayPosicionesGanadores[x]].combinacionCartas.sort(function(a, b) {
-          return b - a;
-        });
-
-        if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[0] > cartaMayor) {
-          cartaMayor = jugadores[arrayPosicionesGanadores[x]].combinacionCartas[0];
-          ganadorDefinitivo[0] = arrayPosicionesGanadores[x];
-        }
-      }
-      contadorGanadores(ganadorDefinitivo[0]);
+      evaluarCartaMayor69();
       break;
 
     case 10:
-      //REVISAR QUE HACER CUANDO HAY UN EMPATE Y NO SE PUEDA RESOLVER
-      //Como la Escalera Real no se puede desempatar (se devuelve el mismo arreglo de posiciones)
+      //COMBINACION 10:Escalera Real
       for (var i = 0; i < arrayPosicionesGanadores.length; i++) {
         arrayPosiciones[i] = arrayPosicionesGanadores[i];
       }
@@ -132,44 +112,150 @@ function decidirGanadorEmpate(arrayPosicionesGanadores) {
 
 
 
-  // Se usa en el switch (1,5,6)
-  function evaluarCartaMayor(posicionDeCarta) {
+  // Se usa en el switch (6 y 9) //Revisar con lo de J,Q,K,1,2
+  function evaluarCartaMayor69() {
     for (var x = 0; x < arrayPosicionesGanadores.length; x++) {
 
       jugadores[arrayPosicionesGanadores[x]].combinacionCartas.sort(function(a, b) {
         return b - a;
       });
 
-      if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[4] === 1) {
-        cartaMayor = jugadores[arrayPosicionesGanadores[x]].combinacionCartas[4];
-        ganadorDefinitivo[0] = arrayPosicionesGanadores[x];
-        break;
-      } else {
-        if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[posicionDeCarta] > cartaMayor) {
-          cartaMayor = jugadores[arrayPosicionesGanadores[x]].combinacionCartas[posicionDeCarta];
-          ganadorDefinitivo[0] = arrayPosicionesGanadores[x];
-        }
-
+      if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[0] > cartaMayor) {
+        cartaMayor = jugadores[arrayPosicionesGanadores[x]].combinacionCartas[0];
       }
     }
-    return ganadorDefinitivo;
+
+    for (var w = 0; w < arrayPosicionesGanadores.length; w++) {
+      if (jugadores[arrayPosicionesGanadores[w]].combinacionCartas[0] === cartaMayor) {
+        arrayPosiciones.push(arrayPosicionesGanadores[w]);
+      }
+    }
+    //return ganadorDefinitivo;
   }
 
 
-  function contadorGanadores(valorBuscado) {
-    var arrayPosiciones = [];
-    var indice;
-    indice = arrayPosicionesGanadores.indexOf(valorBuscado);
-    while (indice !== -1) {
-      arrayPosiciones.push(indice);
-      indice = arrayPosicionesGanadores.indexOf(valorBuscado, indice + 1);
+
+  // Se usa en el switch (1 y 5)  //Revisar con lo de J,Q,K,1,2
+  function evaluarCartaMayor15() {
+    for (var x = 0; x < arrayPosicionesGanadores.length; x++) {
+
+      jugadores[arrayPosicionesGanadores[x]].combinacionCartas.sort(function(a, b) {
+        return b - a;
+      });
+
+      if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[0] > cartaMayor) {
+        cartaMayor = jugadores[arrayPosicionesGanadores[x]].combinacionCartas[0];
+      } else if (jugadores[arrayPosicionesGanadores[x]].combinacionCartas[4] === 1) {
+        existeAS = true;
+      }
+    }
+
+    if (existeAS === true) {
+      for (var a = 0; a < arrayPosicionesGanadores.length; a++) {
+        if (jugadores[arrayPosicionesGanadores[a]].combinacionCartas[4] === 1) {
+          arrayPosiciones.push(arrayPosicionesGanadores[a]);
+        }
+      }
+    } else {
+      for (var w = 0; w < arrayPosicionesGanadores.length; w++) {
+        if (jugadores[arrayPosicionesGanadores[w]].combinacionCartas[0] === cartaMayor) {
+          arrayPosiciones.push(arrayPosicionesGanadores[w]);
+        }
+      }
+    }
+    //return ganadorDefinitivo;
+  }
+
+
+  function evaluarCartaMayor24(parejaOTrio) {
+    for (var b = 0; b < arrayPosicionesGanadores.length; b++) {
+      contador = 0;
+      for (var n = 0; n < jugadores[arrayPosicionesGanadores[b]].combinacionCartas.length; n++) {
+        var valorActual = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+        for (var m = 0; m < jugadores[arrayPosicionesGanadores[b]].combinacionCartas.length; m++) {
+          if (valorActual === jugadores[arrayPosicionesGanadores[b]].combinacionCartas[m]) {
+            contador++;
+          }
+        }
+        if (contador === parejaOTrio) {
+          valorCarta[b] = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+        }
+        contador = 0;
+      }
+    }
+
+    for (var i = 0; i < valorCarta.length; i++) {
+      if (valorCarta[i] > mayor) {
+        mayor = valorCarta[i];
+      }
+    }
+
+    for (var w = 0; w < valorCarta.length; w++) {
+      if (valorCarta[w] === mayor) {
+        arrayPosiciones.push(arrayPosicionesGanadores[w]);
+      }
     }
   }
 
 
+  function evaluarCartaMayor23478() {
+
+    for (var b = 0; b < arrayPosicionesGanadores.length; b++) {
+      contador = 0;
+      for (var n = 0; n < jugadores[arrayPosicionesGanadores[b]].combinacionCartas.length; n++) {
+        var valorActual = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+        for (var m = 0; m < jugadores[arrayPosicionesGanadores[b]].combinacionCartas.length; m++) {
+          if (valorActual === jugadores[arrayPosicionesGanadores[b]].combinacionCartas[m]) {
+            contador++;
+          }
+        }
+        if (contador === 2) {
+          //combinacionGanadora = 2;
+          valorCarta[b] = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+          if (cuantasParejas === 2) {
+            //combinacionGanadora = 3;
+            valorCarta[b] = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+            break;
+          }
+          if (cuantosTrios === 3) {
+            //combinacionGanadora = 7;
+            valorCarta[b] = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+            break;
+          }
+          cuantasParejas++;
+        } else if (contador === 3) {
+          //combinacionGanadora = 4;
+          valorCarta[b] = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+          if (cuantasParejas === 2) {
+            //combinacionGanadora = 7;
+            valorCarta[b] = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+            break;
+          }
+          cuantosTrios++;
+
+        } else if (contador === 4) {
+          //combinacionGanadora = 8;
+          valorCarta[b] = jugadores[arrayPosicionesGanadores[b]].combinacionCartas[n];
+          break;
+        }
+        contador = 0;
+      }
+    }
+
+    for (var i = 0; i < valorCarta.length; i++) {
+      if (valorCarta[i] > mayor) {
+        mayor = valorCarta[i];
+      }
+    }
+
+    for (var w = 0; w < valorCarta.length; w++) {
+      if (valorCarta[w] === mayor) {
+        arrayPosiciones.push(arrayPosicionesGanadores[w]);
+      }
+    }
+  }
 
 
+  console.log(arrayPosiciones);
   return arrayPosiciones;
-  //return ganadorDefinitivo;
-  //return "EMPATE";
 }

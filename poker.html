@@ -23,9 +23,9 @@
                 <input type="button" value="Igualar" id="igualar">
                 <input type="button" value="Subir" id="subir">
                 <input type="button" value="Pasar" id="pasar" class="oculto">
-               <input type="button" value="Retirarme" id="retirarme">
+                <input type="button" value="Retirarme" id="retirarme">
 
-                </div>
+            </div>
 
 
 
@@ -33,36 +33,40 @@
 
 
         <div id="divPantallaInicial" class="divPantallaInicial">
-            <div id="divApuestaMinima" class="divIngresoDeDatos">
-                <form id="formApuestaMinima" onsubmit="return false">
-                    <label for="txtApuestaMinima">Ingrese la apuesta mínima: $</label>
-                    <input type="number" id="txtApuestaMinima" min="1" value="1" required autofocus>
-                    <br>
-                    <input type="submit"  value="Aceptar" id="btnAceptar">
-                </form>
-            </div>
-            <div id="divIngresoDeDatos" class="oculto">
-                <h3>¡Bienvenido! La apuesta mínima es: $<span id="spanApuestaMinima"></span></h3>
-                <div id="divAgregar">
-                    <form id="formIngresoDeDatos">
-                        <label for="txtNombre">Nombre:</label>
-                        <input type="text" id="txtNombre" required title="Campo Obligatorio" maxlength="8" >
+            <div id="divContenedorPantallaInicial">
+                <div id="divApuestaMinima" class="divIngresoDeDatos">
+                    <form id="formApuestaMinima" onsubmit="return false">
+                        <label for="txtApuestaMinima">Ingrese la apuesta mínima: $</label>
+                        <input type="number" id="txtApuestaMinima" min="1" value="1" required autofocus>
                         <br>
-                        <label for="txtDinero">Dinero:</label>
-                        <input type="number" id="txtDinero" required title="Campo Obligatorio">
-                        <br>
-                        <input type="submit" value="Agregar jugador" id="btnAgregarJugador">
-                        <input type="submit" value="Comenzar partida" id="btnComenzar" class="disabled" disabled >
-
+                        <input type="submit"  value="Aceptar" id="btnAceptar">
                     </form>
-
-
                 </div>
+                <div id="divIngresoDeDatos" class="oculto">
+                    <h3>¡Bienvenido! La apuesta mínima es: $<span id="spanApuestaMinima"></span></h3>
+                    <div id="divAgregar">
+                        <form id="formIngresoDeDatos">
+                            <label for="txtNombre">Nombre:</label>
+                            <input type="text" id="txtNombre" required title="Campo Obligatorio" maxlength="8" >
+                            <br>
+                            <label for="txtDinero">Dinero:</label>
+                            <input type="number" id="txtDinero" required title="Campo Obligatorio">
+                            <br>
+                            <input type="submit" value="Agregar jugador" id="btnAgregarJugador">
+                            <input type="submit" value="Comenzar partida" id="btnComenzar" class="disabled" disabled >
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+                <br>
+                <p id="lblJugadores"></p>
             </div>
-
-            <br>
-            <p id="lblJugadores"></p>
-
+            <div id="divGanadores" >
+                <h6 id="tituloGanadores"></h6>
+            </div>
         </div>
 
 
@@ -90,7 +94,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador1"></label>
+                <label class="apuesta_jugador1"></label>
             </div>
             <div id="div2" class="oculto">
                 <div class="divCarta1">
@@ -121,7 +125,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador3"></label>
+                <label class="apuesta_jugador3"></label>
             </div>
             <div id="div4" class="oculto">
                 <div class="divCarta1">
@@ -136,7 +140,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador4"></label>
+                <label class="apuesta_jugador4"></label>
             </div>
             <div id="div5" class="oculto">
                 <div class="divCarta1">
@@ -151,7 +155,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador5"></label>
+                <label class="apuesta_jugador5"></label>
             </div>
             <div id="div6" class="oculto">
                 <div class="divCarta1">
@@ -166,7 +170,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador6"></label>
+                <label class="apuesta_jugador6"></label>
             </div>
             <div id="div7" class="oculto">
                 <div class="divCarta1">
@@ -181,7 +185,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador7"></label>
+                <label class="apuesta_jugador7"></label>
             </div>
             <div id="div8" class="oculto">
                 <div class="divCarta1">
@@ -196,7 +200,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador8"></label>
+                <label class="apuesta_jugador8"></label>
             </div>
             <div id="div9" class="oculto">
                 <div class="divCarta1">
@@ -211,7 +215,7 @@
                     <h5>Saldo:</h5>
                 </div>
                 <span class="oculto"></span>
-            <label class="apuesta_jugador9"></label>
+                <label class="apuesta_jugador9"></label>
             </div>
             <div id="div10" class="oculto">
                 <div class="divCarta1">

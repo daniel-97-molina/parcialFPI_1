@@ -202,7 +202,7 @@ opacity: 1;
 
 
 
-#divPantallaInicial > p{
+#divContenedorPantallaInicial p{
   text-align: center;
   border-bottom: 1px solid darkgreen;
   border-top: 1px solid darkgreen;
@@ -398,4 +398,38 @@ opacity: 1;
       width: 80px;
      height:100px
     }
+}
+
+
+#divGanadores div{
+    background-color: rgba( 128, 150, 138 ,0.5);
+    margin: 20px 0;
+    color: inherit;
+    text-align: center;
+    position: relative;
+}
+
+#divGanadores h6{
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+#divGanadores p{
+    font-size: 20px;
+    font-weight: bold;
+}
+#divGanadores img{
+    width: 15%;
+    height: auto;
+    margin: 2px;
+    display: inline-block;
+}
+#divGanadores span{
+    background-image: url("../images/icono-ganador.png");
+    height: 120px;
+    width: 120px;
+    background-size: contain;
+    position: absolute;
+    left: 530px;
+    
 }
