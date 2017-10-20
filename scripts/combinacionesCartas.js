@@ -1,11 +1,12 @@
 //Metodo para establecer las 10 formas diferentes como se puede tomar 3 de las 5 cartas comunes
 //Devuelve la mejor de las combinaciones de cartas que se pudo formar de todas por jugador
 function combinacionCartasGenerales(posicionJugador) {
-  var resultadoCombinaciones = [];
+  var resultadoCombinaciones = [];///////////////////YA NO SE USA
   var mejorCombinacion = 0;
   //Creadas despues
   var arrayTodasLasCombinaciones = [];
   var arrayCartasJugador = [];
+  var posicion;
 
   arrayTodasLasCombinaciones[0] = [0, 1, 2, posicionJugador];
   arrayTodasLasCombinaciones[1] = [1, 2, 3, posicionJugador];
@@ -20,22 +21,16 @@ function combinacionCartasGenerales(posicionJugador) {
 
   //Agregado despues
   for (var i = 0; i < arrayTodasLasCombinaciones.length; i++) {
-    resultadoCombinaciones[i] = posiblesCombinaciones(arrayTodasLasCombinaciones[i]);
-    //Agregado despues
-    arrayCartasJugador[i] = [vectorCartasGenerales[(arrayTodasLasCombinaciones[i][0])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][1])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][2])].numero, jugadores[posicionJugador].carta1.numero, jugadores[posicionJugador].carta2.numero];
-
-  }
-
-  for (var w = 0; w < resultadoCombinaciones.length; w++) {
-    if (resultadoCombinaciones[w] > mejorCombinacion) {
-      mejorCombinacion = resultadoCombinaciones[w];
-
+    if (posiblesCombinaciones(arrayTodasLasCombinaciones[i]) > mejorCombinacion) {
+      mejorCombinacion = posiblesCombinaciones(arrayTodasLasCombinaciones[i]);
+      posicion = i;
     }
+    arrayCartasJugador[i] = [vectorCartasGenerales[(arrayTodasLasCombinaciones[i][0])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][1])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][2])].numero, jugadores[posicionJugador].carta1.numero, jugadores[posicionJugador].carta2.numero];
   }
 
   //Agregado despues
   for (var t = 0; t < jugadores.length; t++) {
-    jugadores[t].combinacionCartas = arrayCartasJugador[resultadoCombinaciones.indexOf(mejorCombinacion)];
+    jugadores[t].combinacionCartas = arrayCartasJugador[posicion];
   }
 
   return mejorCombinacion;
@@ -78,10 +73,6 @@ function posiblesCombinaciones(vectorCombinaciones) {
     cadenaFamilias = cadenaFamilias + "" + arrayFamiliasCartas[i];
     cadenaNumeros = cadenaNumeros + "" + arrayNumerosCartas[i];
   }
-
-  //PARA PROBAR EL FUNCIONAMIENTO DE LAS COMBINACIONES
-  //    cadenaFamilias = "22325";
-  //    cadenaNumeros = "89101112";
 
 
   //COMBINACION 1: Carta más alta
@@ -149,10 +140,8 @@ function posiblesCombinaciones(vectorCombinaciones) {
   //COMBINACION 5: Escalera
   //5 cartas sucesivas que no son del misma familia
   if (/(12345)$/.test(cadenaNumeros) || /(23456)$/.test(cadenaNumeros) || /(34567)$/.test(cadenaNumeros) || /(45678)$/.test(cadenaNumeros) || /(56789)$/.test(cadenaNumeros) || /(678910)$/.test(cadenaNumeros)) {
-    //        console.log("5 cartas sucesivas que no son del misma familia) (2)");
     combinacionGanadora = 5;
   } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros) || /(110111213)$/.test(cadenaNumeros)) {
-    //        console.log("5 cartas sucesivas que no son del misma familia (3)");
     combinacionGanadora = 5;
   }
 
@@ -167,20 +156,15 @@ function posiblesCombinaciones(vectorCombinaciones) {
   //5 cartas seguidas del misma familia desde el 10 al As
 
   if (/(0){5}$/.test(cadenaFamilias) || /(1){5}$/.test(cadenaFamilias) || /(2){5}$/.test(cadenaFamilias) || /(3){5}$/.test(cadenaFamilias)) {
-    //        console.log("5 cartas del misma familia (2)");
     combinacionGanadora = 6;
     if (/(12345)$/.test(cadenaNumeros) || /(23456)$/.test(cadenaNumeros) || /(34567)$/.test(cadenaNumeros) || /(45678)$/.test(cadenaNumeros) || /(56789)$/.test(cadenaNumeros) || /(678910)$/.test(cadenaNumeros)) {
-      //            console.log("5 cartas consecutivas del misma familia (2)");
       combinacionGanadora = 9;
     } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros)) {
-      //            console.log("5 cartas consecutivas del misma familia (3)");
       combinacionGanadora = 9;
     } else if (/(110111213)$/.test(cadenaNumeros)) {
-      //            console.log("5 cartas seguidas del misma familia desde el 10 al As (2)");
       combinacionGanadora = 10;
     }
   }
-
 
   return combinacionGanadora;
 
