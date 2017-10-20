@@ -1,13 +1,12 @@
 //Metodo para establecer las 10 formas diferentes como se puede tomar 3 de las 5 cartas comunes
 //Devuelve la mejor de las combinaciones de cartas que se pudo formar de todas por jugador
 function combinacionCartasGenerales(posicionJugador) {
-  var resultadoCombinaciones = [];///////////////////YA NO SE USA
   var mejorCombinacion = 0;
-  //Creadas despues
+  
   var arrayTodasLasCombinaciones = [];
   var arrayCartasJugador = [];
-  var posicion;
   var objetosCarta = [];
+  var posicion;
 
   arrayTodasLasCombinaciones[0] = [0, 1, 2, posicionJugador];
   arrayTodasLasCombinaciones[1] = [1, 2, 3, posicionJugador];
@@ -20,7 +19,6 @@ function combinacionCartasGenerales(posicionJugador) {
   arrayTodasLasCombinaciones[8] = [0, 2, 3, posicionJugador];
   arrayTodasLasCombinaciones[9] = [1, 3, 4, posicionJugador];
 
-  //Agregado despues
   for (var i = 0; i < arrayTodasLasCombinaciones.length; i++) {
     if (posiblesCombinaciones(arrayTodasLasCombinaciones[i]) > mejorCombinacion) {
       mejorCombinacion = posiblesCombinaciones(arrayTodasLasCombinaciones[i]);
@@ -30,11 +28,8 @@ function combinacionCartasGenerales(posicionJugador) {
     objetosCarta[i] = [vectorCartasGenerales[(arrayTodasLasCombinaciones[i][0])], vectorCartasGenerales[(arrayTodasLasCombinaciones[i][1])], vectorCartasGenerales[(arrayTodasLasCombinaciones[i][2])], jugadores[posicionJugador].carta1, jugadores[posicionJugador].carta2];
   }
 
-  //Agregado despues
-  
-    jugadores[posicionJugador].combinacionCartas = arrayCartasJugador[posicion];
-    jugadores[posicionJugador].objetosCarta = objetosCarta[posicion];
-  
+  jugadores[posicionJugador].combinacionCartas = arrayCartasJugador[posicion];
+  jugadores[posicionJugador].objetosCarta = objetosCarta[posicion];
 
   return mejorCombinacion;
 }
@@ -108,7 +103,7 @@ function posiblesCombinaciones(vectorCombinaciones) {
   var cuantosTrios = 0;
   for (var n = 0; n < arrayNumerosCartas.length; n++) {
     var valorActual = arrayNumerosCartas[n];
-    for (m = 0; m < arrayNumerosCartas.length; m++) {
+    for (var m = 0; m < arrayNumerosCartas.length; m++) {
       if (valorActual === arrayNumerosCartas[m]) {
         contador++;
       }
@@ -146,6 +141,8 @@ function posiblesCombinaciones(vectorCombinaciones) {
     combinacionGanadora = 5;
   } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros) || /(110111213)$/.test(cadenaNumeros)) {
     combinacionGanadora = 5;
+  } else if (/(12111213)$/.test(cadenaNumeros) || /(1231213)$/.test(cadenaNumeros) || /(123413)$/.test(cadenaNumeros)) {
+    combinacionGanadora = 5;
   }
 
 
@@ -164,7 +161,9 @@ function posiblesCombinaciones(vectorCombinaciones) {
       combinacionGanadora = 9;
     } else if (/(7891011)$/.test(cadenaNumeros) || /(89101112)$/.test(cadenaNumeros) || /(910111213)$/.test(cadenaNumeros)) {
       combinacionGanadora = 9;
-    } else if (/(110111213)$/.test(cadenaNumeros)) {
+    } else if (/(12111213)$/.test(cadenaNumeros) || /(1231213)$/.test(cadenaNumeros) || /(123413)$/.test(cadenaNumeros)) {
+      combinacionGanadora = 9;
+    }else if (/(110111213)$/.test(cadenaNumeros)) {
       combinacionGanadora = 10;
     }
   }

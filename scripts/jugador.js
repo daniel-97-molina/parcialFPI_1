@@ -58,7 +58,7 @@ function add(nombre, saldo) {
     jugadorAgregado.carta1 = agregarCarta();
     jugadorAgregado.carta2 = agregarCarta();
     jugadores.push(jugadorAgregado);
-    
+
 
 }
 
@@ -111,8 +111,8 @@ $("#range").onchange = function () {
 
 
 $("#btnComenzar").onclick = function (event) {
-    
-    
+
+
     event.preventDefault();
     posicionar(jugadores.length);
 
@@ -226,8 +226,8 @@ $("#subir").onclick = function () {
     } else { // Si es "Apostar"
         range.setAttribute("min", apuestaMinima);
 //        range.setAttribute("max", jugadores[turno].saldo);
-        $("#igualar").className = "";
-        $("#subir").value = "Subir";
+        //$("#igualar").className = "";
+        //$("#subir").value = "Subir";
         $("#pasar").className = "oculto";
         jugadores[turno].apostar(parseFloat(range.value));
         apuestaAnterior = parseFloat(range.value);
@@ -259,8 +259,17 @@ $("#retirarme").onclick = function (event) {
     } else {
         turno = jugadores.length - 1;
     }
+
     
     console.log("posición: " + posicion);
+
+
+
+    //console.log("posición: " + posicion);
+//    if (jugadores.length === 1) {
+//        conmutarCartas(jugadores[turno].div.id);
+//        //jugadores[turno].div.className += " turno ganador";
+//    } else {
 
     controladorTurno();
 //    }
@@ -280,7 +289,9 @@ function controladorTurno() {
     }
 
     if (contador === jugadores.length) {// ES NUEVA RONDA
+        apuestaAnterior = 0;
         $("#range").setAttribute("min", apuestaMinima);
+        $("#lblRangeValue").innerHTML = "$" + $("#range").value;
         if (jugadores.length === 1) { //Ganador por default
             $("#divBotonesHeader").className = "oculto";
             jugadores[0].div.className += " turno ganador";
@@ -294,6 +305,7 @@ function controladorTurno() {
 
         if (contadorCartaGeneral > 5) {//final juego
             $("#btnJugarOtraMano").className = "";
+            $(".pot").innerHTML = "$"+pot;
             var ganadores = decidirGanador();
             for (var i = 0; i < ganadores.length; i++) {
                 //mostrarCartas(jugadores[i].div.id);
@@ -311,25 +323,53 @@ function controladorTurno() {
             return;
 
         }
+
+        if (jugadores[turno].saldo < apuestaAnterior || jugadores[turno].saldo < apuestaMinima) { //SI DEBE HACER ALL IN
+            $("#igualar").className = "oculto";
+            //console.log($("#igualar").className);
+            $("#range").className = "oculto";
+            $("#subir").value = "All in";
+
+        } else {  //Si le alcanza el saldo para apostar
+            $("#range").className = "range";
+            $("#igualar").className = "";
+            $("#subir").value = "Subir";
+            if (apuestaAnterior === 0) {
+                $("#subir").value = "Apostar";
+            }
+        }
+        if (apuestaAnterior === 0) {
+            $("#subir").value = "Apostar";
+            $("#pasar").className = "";
+        } else {
+            $("#pasar").className = "oculto";
+        }
+        
+        if( $("#subir").value === "Apostar"){
+            $("#range").className = "range";
+        }
+
         var turnoTemporal = jugadores[turno].div.id;
 
-        if (posicion === jugadores.length - 1) {
+        if (posicion === jugadores.length - 1) { //cambio de turno
             turno = 0;
         } else {
             turno = posicion + 1;
         }
-        console.log("Turno nueva ronda :" + turno);
+        //console.log("Turno nueva ronda :" + turno);
         var div_JugadorenJuego = jugadores[turno].div;
         div_JugadorenJuego.className += " turno";
         conmutarCartas(div_JugadorenJuego.id, turnoTemporal);
 
         $("#range").setAttribute("max", jugadores[turno].saldo);
 
-        apuestaAnterior = 0;
+
         $(".cartasJuego > .pot").innerHTML = "$" + pot;
-        $("#subir").value = "Apostar";
-        $("#pasar").className = "";
+        //$("#subir").value = "Apostar";
+
         $("#igualar").className = "oculto";
+
+
         if (vectorCartasGenerales.length === 0) {
             agregarCartaGeneral(3);
         } else {
@@ -349,7 +389,7 @@ function controladorTurno() {
         } else {
             turno++;
         }
-        console.log("turno despues de cambiar: " + turno);
+        //console.log("turno despues de cambiar: " + turno);
         setNombreJugador();
         
         $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
@@ -357,11 +397,12 @@ function controladorTurno() {
         div_JugadorenJuego.className += " turno";
         conmutarCartas(div_JugadorenJuego.id);
         //console.log("saldo: "+jugadores[turno].saldo+" -apuestaAnterior :"+apuestaAnterior);
-        if (jugadores[turno].saldo < apuestaAnterior || jugadores[turno].saldo < apuestaMinima) { //SI EBE HACER ALL IN
+        if (jugadores[turno].saldo < apuestaAnterior || jugadores[turno].saldo < apuestaMinima) { //SI DEBE HACER ALL IN
             $("#igualar").className = "oculto";
             console.log($("#igualar").className);
             $("#range").className = "oculto";
             $("#subir").value = "All in";
+
 
         }else if(jugadores[turno].saldo === apuestaAnterior){
              $("#range").className = "oculto";
@@ -372,10 +413,33 @@ function controladorTurno() {
   $("#range").className = "range";
             $("#igualar").className = "";
             $("#subir").value = "Subir";
-        } else {
-          
+        }else {  //Si le alcanza el saldo para apostar
+            $("#range").className = "range";
+            $("#igualar").className = "";
+            $("#subir").value = "Subir";
+            if (apuestaAnterior === 0) {
+                $("#subir").value = "Apostar";
+            }
         }
+        
+        if (apuestaAnterior === 0) {
+            $("#subir").value = "Apostar";
+            $("#pasar").className = "";
+        } else {
+            $("#pasar").className = "oculto";
+        }
+        if(apuestaAnterior=== 0 && jugadores[turno].saldo >= apuestaMinima){
+            $("#subir").value = "Apostar";
+        }
+        if(jugadores[turno].saldo < apuestaMinima){
+            $("#subir").value = "All in";
+        }
+        
+        if( $("#subir").value === "Apostar"){
+            $("#range").className = "range";
 
+        }
+    
     }
 
 }
@@ -412,7 +476,7 @@ $("#btnAceptar").onclick = function (event) {
 
 
 $("#btnAgregarJugador").onclick = function (event) {
-    
+
     var sNombre = $("#txtNombre").value;
     var iDinero = $("#txtDinero").value;
     var error = false;
@@ -442,12 +506,12 @@ $("#btnAgregarJugador").onclick = function (event) {
 
     }
     $("#txtNombre").focus();
-    
-    if(jugadores.length === 10){
-        $("#btnAgregarJugador").className="disabled";
-        $("#btnAgregarJugador").setAttribute("disabled","");
+
+    if (jugadores.length === 10) {
+        $("#btnAgregarJugador").className = "disabled";
+        $("#btnAgregarJugador").setAttribute("disabled", "");
     }
-    
+
 };
 
 
@@ -462,6 +526,7 @@ function mostrarGanador() {
     } else {
         $("#tituloGanadores").innerHTML = "¡Empate!";
     }
+    $("#tituloPot").innerHTML = "Valor del pot: $"+pot;
     for (var i = 0; i < indicesGanadores.length; i++) {
         generarDivFinal(jugadores[indicesGanadores[i]], true);
     }
