@@ -256,7 +256,7 @@ $("#retirarme").onclick = function (event) {
         turno = jugadores.length - 1;
     }
 
-    console.log("posición: " + posicion);
+    //console.log("posición: " + posicion);
 //    if (jugadores.length === 1) {
 //        conmutarCartas(jugadores[turno].div.id);
 //        //jugadores[turno].div.className += " turno ganador";
@@ -318,7 +318,6 @@ function controladorTurno() {
             $("#igualar").className = "oculto";
             //console.log($("#igualar").className);
             $("#range").className = "oculto";
-            console.log("poniendo all in al value del boton");
             $("#subir").value = "All in";
 
         } else {  //Si le alcanza el saldo para apostar
@@ -347,7 +346,7 @@ function controladorTurno() {
         } else {
             turno = posicion + 1;
         }
-        console.log("Turno nueva ronda :" + turno);
+        //console.log("Turno nueva ronda :" + turno);
         var div_JugadorenJuego = jugadores[turno].div;
         div_JugadorenJuego.className += " turno";
         conmutarCartas(div_JugadorenJuego.id, turnoTemporal);
@@ -380,7 +379,7 @@ function controladorTurno() {
         } else {
             turno++;
         }
-        console.log("turno despues de cambiar: " + turno);
+        //console.log("turno despues de cambiar: " + turno);
         setNombreJugador();
         $("#range").setAttribute("max", jugadores[turno].saldo - apuestaAnterior);
         var div_JugadorenJuego = jugadores[turno].div;
@@ -391,7 +390,6 @@ function controladorTurno() {
             $("#igualar").className = "oculto";
             //console.log($("#igualar").className);
             $("#range").className = "oculto";
-            console.log("poniendo all in al value del boton");
             $("#subir").value = "All in";
 
         } else {  //Si le alcanza el saldo para apostar
