@@ -27,12 +27,12 @@ function decidirGanador() {
   }
 
 
-  if (arrayPosiciones.length === 1) {
-    return posicionJugadorGanador;
-  } else if (arrayPosiciones.length > 1) {
-    return decidirGanadorEmpate(arrayPosiciones);
-  }
-  //return arrayPosiciones;
+//  if (arrayPosiciones.length === 1) {
+//    return posicionJugadorGanador;
+//  } else if (arrayPosiciones.length > 1) {
+//    return decidirGanadorEmpate(arrayPosiciones);
+//  }
+  return arrayPosiciones;
 
 }
 

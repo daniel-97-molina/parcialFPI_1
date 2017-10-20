@@ -7,6 +7,7 @@ function combinacionCartasGenerales(posicionJugador) {
   var arrayTodasLasCombinaciones = [];
   var arrayCartasJugador = [];
   var posicion;
+  var objetosCarta = [];
 
   arrayTodasLasCombinaciones[0] = [0, 1, 2, posicionJugador];
   arrayTodasLasCombinaciones[1] = [1, 2, 3, posicionJugador];
@@ -26,12 +27,14 @@ function combinacionCartasGenerales(posicionJugador) {
       posicion = i;
     }
     arrayCartasJugador[i] = [vectorCartasGenerales[(arrayTodasLasCombinaciones[i][0])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][1])].numero, vectorCartasGenerales[(arrayTodasLasCombinaciones[i][2])].numero, jugadores[posicionJugador].carta1.numero, jugadores[posicionJugador].carta2.numero];
+    objetosCarta[i] = [vectorCartasGenerales[(arrayTodasLasCombinaciones[i][0])], vectorCartasGenerales[(arrayTodasLasCombinaciones[i][1])], vectorCartasGenerales[(arrayTodasLasCombinaciones[i][2])], jugadores[posicionJugador].carta1, jugadores[posicionJugador].carta2];
   }
 
   //Agregado despues
-  for (var t = 0; t < jugadores.length; t++) {
-    jugadores[t].combinacionCartas = arrayCartasJugador[posicion];
-  }
+  
+    jugadores[posicionJugador].combinacionCartas = arrayCartasJugador[posicion];
+    jugadores[posicionJugador].objetosCarta = objetosCarta[posicion];
+  
 
   return mejorCombinacion;
 }
